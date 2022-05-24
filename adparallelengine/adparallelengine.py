@@ -687,11 +687,6 @@ class Engine:
                 for item in kwargs["share"]:
                     kwargs[item] = kwargs["share"][item]
                 del kwargs["share"]
-        elif self._kind == "dask" or self._kind == "kubernetes":
-            if "share" in kwargs:
-                for item in kwargs["share"]:
-                    kwargs[item] = self.client.scatter(kwargs["share"][item], broadcast=True)
-                del kwargs["share"]
         else:
             if "share" in kwargs:
                 for item in kwargs["share"]:
