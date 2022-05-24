@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from transparentpath import Path
 
-from adparellelengine import Engine
+from adparallelengine import Engine
 
 
 class Dummy:
