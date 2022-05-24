@@ -21,17 +21,17 @@ def method(
     some_float: float,
 ):
     assert Dummy.some_attr == 1
-    print("")
-    print("Element\n", element)
-    print("Other stuff\n", some_other_stuff)
-    print("Float\n", some_float)
-    print("Dummy attr\n", Dummy.some_attr)
+    # print("")
+    # print("Element\n", element)
+    # print("Other stuff\n", some_other_stuff)
+    # print("Float\n", some_float)
+    # print("Dummy attr\n", Dummy.some_attr)
     to_ret = (
         element * some_other_stuff + some_float + Dummy.some_attr,
         3 * (element * some_other_stuff + some_float + Dummy.some_attr),
     )
-    print("Result 1\n", to_ret[0])
-    print("Result 2\n", to_ret[1])
+    # print("Result 1\n", to_ret[0])
+    # print("Result 2\n", to_ret[1])
     return to_ret
 
 
@@ -80,21 +80,21 @@ if __name__ == "__main__":
     # print("Results:", res)
 
     if gather is True:
-        print("gather")
+        # print("gather")
         assert len(res) == 2 * len(dfs)
         for i in range(0, len(dfs), 2):
-            print(i)
+            # print(i)
             expected = dfs[int(i / 2)] * s + f + Dummy.some_attr
-            print("Expected\n", expected)
+            # print("Expected\n", expected)
             pd.testing.assert_frame_equal(expected, res[i])
             pd.testing.assert_frame_equal(3 * expected, res[i + 1])
 
     else:
-        print("Don't gather")
+        # print("Don't gather")
         assert len(res) == len(dfs)
         for i in range(len(dfs)):
-            print(i)
+            # print(i)
             expected = dfs[i] * s + f + Dummy.some_attr
-            print("Expected\n", expected)
+            # print("Expected\n", expected)
             pd.testing.assert_frame_equal(expected, res[i][0])
             pd.testing.assert_frame_equal(3 * expected, res[i][1])
