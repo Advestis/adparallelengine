@@ -23,7 +23,7 @@ def method(
     assert Dummy.some_attr == 1
     # print("")
     # print("Element\n", element)
-    # print("Other stuff\n", some_other_stuff)
+    print("Other stuff\n", type(some_other_stuff), some_other_stuff)
     # print("Float\n", some_float)
     # print("Dummy attr\n", Dummy.some_attr)
     to_ret = (
@@ -70,7 +70,7 @@ if __name__ == "__main__":
         **share_kwargs
     )
 
-    if share is True and which != "serial" and which != "dask":
+    if share is True and which != "serial":
         assert len(list(engine.path_shared.ls())) == 1
     else:
         if engine.path_shared.isdir():
