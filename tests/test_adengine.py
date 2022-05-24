@@ -21,7 +21,7 @@ import pytest
 def test_engine(which, gather, batched, share):
     if which != "mpi":
         assert os.system(f"python tests/main.py {which} {gather} {batched} {share}") == 0
-    else:
-        assert os.system(
-            f"mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py {which} {gather} {batched} {share}"
-        ) == 0
+    # else:
+    #     assert os.system(
+    #         f"mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py {which} {gather} {batched} {share}"
+    #     ) == 0
