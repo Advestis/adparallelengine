@@ -73,7 +73,8 @@ if __name__ == "__main__":
     if share is True and which != "serial" and which != "dask":
         assert len(list(engine.path_shared.ls())) == 1
     else:
-        assert len(list(engine.path_shared.ls())) == 0
+        if engine.path_shared.isdir():
+            assert len(list(engine.path_shared.ls())) == 0
     engine.clean_shared()
     assert len(list(engine.path_shared.ls())) == 0
 
