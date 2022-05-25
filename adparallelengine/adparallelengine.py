@@ -443,9 +443,7 @@ class Engine:
         if self.verbose is True:
             logger.info("Computation is not parallel")
         t = time()
-        results = []
-        for e in collection:
-            results.append(self._pre_launch(e, method, False, kwargs))
+        results = [self._pre_launch(e, method, False, kwargs) for e in collection]
 
         return self._finish_job(
             _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=False)
@@ -825,10 +823,13 @@ class Engine:
                 in_init_method = False
                 if item in dict(inspect.signature(method).parameters):
                     in_method = True
-                if "init_method" in kwargs and item in dict(
-                    inspect.signature(kwargs["init_method"]["method"]).parameters
-                ):
-                    in_init_method = True
+                if "init_method" in kwargs:
+                    if "method" not in kwargs["init_method"]:
+                        raise ValueError("If using kwarg 'init_method' in Engine, must specify the 'method' key")
+                    if item in dict(
+                            inspect.signature(kwargs["init_method"]["method"]).parameters
+                    ):
+                        in_init_method = True
                 if not in_init_method and not in_method:
                     raise ValueError(f"Keyword argument {item} is not valid for the given method and init_method")
                 if in_init_method:
