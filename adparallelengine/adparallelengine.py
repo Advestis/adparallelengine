@@ -434,7 +434,7 @@ class Engine:
         if nitems < self._print_percent:
             dt = 1
         indexes_to_print = {
-            i: f"{method_name} : {i}/{nitems}, {round(100 * i / nitems, 2)}%" for i in list(range(dt, nitems, dt))
+            i: f"{method_name} : {i}/{nitems}, {round(100 * i / nitems, 2)}%" for i in list(range(dt, nitems + 1, dt))
         }
         return indexes_to_print
 
