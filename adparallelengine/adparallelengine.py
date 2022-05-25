@@ -79,7 +79,7 @@ class Engine:
         Multiprocessing context. Can be "spawn" (default) or "fork", use "spawn" if your paralleled processes use
         numpy.
     processes_or_threads: str
-        Can be "processes" (default) or "threads". Only relevent if `adparellelengine.adparellelengine.Engine.kind`
+        Can be "processes" (default) or "threads". Only relevent if `adparallelengine.adparallelengine.Engine.kind`
         is 'Dask'.
     print_percent: int
         If 'verbose' is True, processes matching 'print_percent' percent will say it when they finished. If None,
@@ -89,7 +89,7 @@ class Engine:
     path_shared: Optional["TransparentPath"]
         To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
         processes read them by sharing a path instead of the heavy object itself. 'path_shared' tells the engine
-        where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparellelengine_temp".
+        where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparallelengine_temp".
     k8s_spec_dict: Optional[dict]
         If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
     verbose: bool
@@ -161,7 +161,7 @@ class Engine:
             cls._MPI, cls._MPIPOOLEXECUTOR = MPI, MPIPoolExecutor
         except ImportError as e:
             raise ImportError(
-                "AdParellelEngine can't import mpi4py. You can do it by running `pip install adparellelengine[mpi]`."
+                "AdparallelEngine can't import mpi4py. You can do it by running `pip install adparallelengine[mpi]`."
                 " Make sure also that MPI is installed on your computer (OpenMPI should work)\n\n"
                 f"Original error was {str(e)}"
             )
@@ -174,8 +174,8 @@ class Engine:
             cls._PANDAS = pd
         except ImportError as e:
             raise ImportError(
-                "AdParellelEngine can't import pandas. You can do it by running"
-                f" `pip install adparellelengine[support_shared]`.\n\nOriginal error was {str(e)}"
+                "AdparallelEngine can't import pandas. You can do it by running"
+                f" `pip install adparallelengine[support_shared]`.\n\nOriginal error was {str(e)}"
             )
 
     @classmethod
@@ -187,8 +187,8 @@ class Engine:
             cls._PATH = Path
         except ImportError as e:
             raise ImportError(
-                "AdParellelEngine can't import transparentpath. You can do it by running"
-                f"`pip install adparellelengine[support_shared]` .\n\nOriginal error was {str(e)}"
+                "AdparallelEngine can't import transparentpath. You can do it by running"
+                f"`pip install adparallelengine[support_shared]` .\n\nOriginal error was {str(e)}"
             )
 
     @classmethod
@@ -200,7 +200,7 @@ class Engine:
             cls._DASK_CLIENT = Client
         except ImportError as e:
             raise ImportError(
-                "AdParellelEngine can't import dask. You can do it by running `pip install adparellelengine[dask]`."
+                "AdparallelEngine can't import dask. You can do it by running `pip install adparallelengine[dask]`."
                 f"\n\nOriginal error was {str(e)}"
             )
 
@@ -213,8 +213,8 @@ class Engine:
             cls._K8S_CLUSTER = KubeCluster
         except ImportError as e:
             raise ImportError(
-                "AdParellelEngine can not import dask_kubernetes. You can do it by running"
-                f" `pip install adparellelengine[k8s]`.\n\nOriginal error was {str(e)}"
+                "AdparallelEngine can not import dask_kubernetes. You can do it by running"
+                f" `pip install adparallelengine[k8s]`.\n\nOriginal error was {str(e)}"
             )
 
     def __init__(
@@ -245,7 +245,7 @@ class Engine:
             Multiprocessing context. Can be "spawn" (default) or "fork", use "spawn" if your paralleled processes use
             numpy.
         processes_or_threads: str
-            Can be "processes" (default) or "threads". Only relevent if `adparellelengine.adparellelengine.Engine.kind`
+            Can be "processes" (default) or "threads". Only relevent if `adparallelengine.adparallelengine.Engine.kind`
             is 'Dask'.
         print_percent: int
             If 'verbose' is True, processes matching 'print_percent' percent will say it when they finished. If None,
@@ -255,7 +255,7 @@ class Engine:
         path_shared: Optional["TransparentPath"]
             To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
             processes read them by sharing a path instead of the heavy object itself. 'path_shared' tells the engine
-            where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparellelengine_temp".
+            where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparallelengine_temp".
         k8s_spec_dict: Optional[dict]
             If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
         verbose: bool
@@ -416,7 +416,7 @@ class Engine:
 
     @property
     def is_parallel(self) -> bool:
-        """True if `adparellelengine.adparellelengine.Engine.kind` is anything but 'serial'"""
+        """True if `adparallelengine.adparallelengine.Engine.kind` is anything but 'serial'"""
         return self._kind != "serial"
 
     @property
@@ -426,7 +426,7 @@ class Engine:
 
     def _make_counter(self, collection, method_name):
         """Determines which processes should say they are done based on
-        `adparellelengine.adparellelengine.Engine.print_percent`"""
+        `adparallelengine.adparallelengine.Engine.print_percent`"""
         if self._print_percent is None:
             return {}
         nitems = len(collection)
@@ -557,7 +557,7 @@ class Engine:
         """
         kwargs reserved for the engine:
         * batched (bool), to batch the items in 'collection'. Uses
-        `adparellelengine.adparellelengine.Engine.batch_multiplier`.
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
         * gather (bool). If True, expects the method to return a collection, and flattens all the returned collections
         into one.
         * gather_method (Callable). If 'gather' is True, use this method to gather the object intead of a basis list
@@ -673,13 +673,13 @@ class Engine:
         return result
 
     def _manage_shared(self, kwargs):
-        """If 'shared' was given in the kwargs when using `adparellelengine.adparellelengine.Engine.__call__`, manages
+        """If 'shared' was given in the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
         it.
 
         * If the engine is not parallel, just ignore the sharing process since it would be useless
         * If using Dask or Dask-Kubernetes, puts each item in kwargs with for value the return of the 'scatter' method
         of the client
-        * Else, writes each item on disk in `adparellelengine.adparellelengine.Engine.path_shared` and replaces
+        * Else, writes each item on disk in `adparallelengine.adparallelengine.Engine.path_shared` and replaces
         kwargs['shared'][item] by the path to the written data
         """
         if not self.is_parallel:
@@ -704,7 +704,7 @@ class Engine:
                         kwargs["share"][item] = self.__class__.PANDAS.DataFrame(kwargs["share"][item])
 
                     if self.path_shared is None:
-                        self.path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparellelengine_temp"
+                        self.path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparallelengine_temp"
                     if not self.path_shared.isdir():
                         self.path_shared.mkdir()
                     p = (self.path_shared / item).with_suffix(".parquet")
@@ -715,15 +715,15 @@ class Engine:
     def _manage_batched_before(
         self, collection: Collection, batched: Union[int, bool], workers: int
     ) -> Tuple[Collection, bool]:
-        """If 'batched' was given to the kwargs when using `adparellelengine.adparellelengine.Engine.__call__`, manages
+        """If 'batched' was given to the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
         it.
 
         * If the engine is not parallel, just ignore the batching process since it is meaningless
         * If 'batched' is an integer and not a boolean, it is interpreted as the number of batches to use. This number
         is adjusted with respect to the length of the collection, and
-        `adparellelengine.adparellelengine.Engine.batch_multiplier` is ignored.
+        `adparallelengine.adparallelengine.Engine.batch_multiplier` is ignored.
         * If 'batched' is True, then the number of batches if the number of available workers times
-        `adparellelengine.adparellelengine.Engine.batch_multiplier`.
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
 
         Parameters
         ----------
