@@ -560,7 +560,7 @@ class Engine:
         into one.
         * gather_method (Callable). If 'gather' is True, use this method to gather the object intead of a basis list
         comprehension
-        * shared (dict). Dictionnary of pd.DataFrame, pd.Series or np.ndarray that should be written to disk and shared
+        * share (dict). Dictionnary of pd.DataFrame, pd.Series or np.ndarray that should be written to disk and shared
         by giving a path to the method.
         * init_method (dict). Dictionnary of the form {"method": a_method, "kwargs": {...}}. The given method will be
         executed in each process using given "kwargs"
