@@ -132,10 +132,10 @@ if __name__ == "__main__":
 
 If `method` is given large objects as keyword arguments, passing the object to workers could imply a significant loss
 of time. I observed that doing out-of-core learning can sometime be quicker, despite the I/O that it implies. It 
-can even save a bit of memory. You can use it by using the "shared" keyword argument :
+can even save a bit of memory. You can use it by using the "share" keyword argument :
 
 ```python
-    results = engine(method, [pd.DataFrame([[1, 2]]), pd.DataFrame([[3, 4]]), pd.DataFrame([[5, 6]])], shared={"s": some_series})
+    results = engine(method, [pd.DataFrame([[1, 2]]), pd.DataFrame([[3, 4]]), pd.DataFrame([[5, 6]])], share={"s": some_series})
 ```
 
 Here, "some_series" will be written to disk by the engine, and only a path will be given to each process, which will then
