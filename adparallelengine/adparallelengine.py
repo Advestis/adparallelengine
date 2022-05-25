@@ -589,7 +589,7 @@ class Engine:
             logger.info(f"Iterable has a length of {len(collection)}")
         indexes_to_print = self._make_counter(collection, method.__name__)
         collection = [
-            (item, None) if i not in indexes_to_print else (item, indexes_to_print[i])
+            (item, None) if i + 1 not in indexes_to_print else (item, indexes_to_print[i + 1])
             for i, item in enumerate(collection)
         ]
         if len(collection) == 0:
@@ -792,10 +792,13 @@ class Engine:
                     in_init_method = False
                     if item in dict(inspect.signature(method).parameters):
                         in_method = True
-                    if "init_method" in kwargs and item in dict(
-                        inspect.signature(kwargs["init_method"]["method"]).parameters
-                    ):
-                        in_init_method = True
+                    if "init_method" in kwargs:
+                        if "method" not in kwargs["init_method"]:
+                            raise ValueError("If using kwarg 'init_method' in Engine, must specify the 'method' key")
+                        if item in dict(
+                            inspect.signature(kwargs["init_method"]["method"]).parameters
+                        ):
+                            in_init_method = True
                     if not in_init_method and not in_method:
                         raise ValueError(
                             f"Shared keyword argument {item} is not valid for the given method and init_method"
