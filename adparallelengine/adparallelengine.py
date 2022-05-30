@@ -703,6 +703,8 @@ class Engine:
 
                     if self.path_shared is None:
                         self.path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparallelengine_temp"
+                        if self.path_shared.isdir():
+                            self.path_shared.rmdir()
                     if not self.path_shared.isdir():
                         self.path_shared.mkdir()
                     p = (self.path_shared / item).with_suffix(".parquet")
