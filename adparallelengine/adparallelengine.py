@@ -850,7 +850,7 @@ class Engine:
             if not batched:
                 return _launch(method, elements, kwargs)
 
-            to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements]).T
+            to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements], dtype="object").T
 
             return to_ret, times, mems
         except Exception as e:
