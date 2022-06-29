@@ -854,7 +854,10 @@ class Engine:
 
             return to_ret, times, mems
         except Exception as e:
-            logger.critical(f"Process caught an error : {''.join(tb.format_exception(None, e, e.__traceback__))}")
+            logger.critical(
+                f"Process caught an error on element(s) {elements}"
+                f" : {''.join(tb.format_exception(None, e, e.__traceback__))}"
+            )
             raise e
 
 
