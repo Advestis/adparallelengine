@@ -5,14 +5,15 @@ import os
 import warnings
 import traceback as tb
 from time import time
-from typing import Callable, Optional, Tuple, Union, Collection
+from typing import Callable, Optional, Tuple, Union, Iterable
+import concurrent.futures as cf
 
 from multiprocessing import get_context, cpu_count
 import logging
-from itertools import repeat
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, Future
 from tempfile import gettempdir
 import tracemalloc
+from itertools import islice
 
 from .decorators import classproperty
 
@@ -31,6 +32,59 @@ def to_bool(s: str):
     raise ValueError(f"Can not convert string {s} to bool")
 
 
+class CustomIterator:
+    def __init__(
+        self,
+        iterable: Iterable,
+        method_name: str = "method",
+        print_percent: Union[None, int] = 10,
+        length: Optional[int] = None,
+    ):
+        self.iterable = iterable
+        if length is None:
+            if not hasattr(iterable, "__len__"):
+                raise TypeError(
+                    "If the length of the iterable is not specified, it must implement the '__len__' method"
+                )
+            # noinspection PyTypeChecker
+            self.length = len(iterable)
+        else:
+            self.length = length
+
+        if print_percent is not None:
+            dt = int(self.length / print_percent)
+            if self.length < print_percent:
+                dt = 1
+            self.indexes_to_print = {
+                i: f"{method_name} : {i}/{self.length}, {round(100 * i / self.length, 2)}%"
+                for i in list(range(dt, self.length + 1, dt))
+            }
+        else:
+            self.indexes_to_print = {}
+
+    def __len__(self):
+        return self.length
+
+    def __iter__(self):
+        for i, elem in enumerate(self.iterable):
+            if i + 1 in self.indexes_to_print:
+                yield elem, self.indexes_to_print[i + 1]
+            else:
+                yield elem, None
+
+    def split(self, nbatches: int):
+        batch_size = self.length // nbatches
+        iterator = iter(self)
+        for first in iterator:
+
+            def chunk():
+                yield first
+                for more in islice(iterator, batch_size - 1):
+                    yield more
+
+            yield [e for e in chunk()]
+
+
 class _Job:
     def __init__(self, results, client, method_name, starttime, batched):
         self.futures = results
@@ -47,6 +101,8 @@ class _Job:
     def gather(self):
         if self.client is not None:
             self.results = self.client.gather(self.futures)
+        elif isinstance(self.futures[0], Future):
+            self.results = [future.result() for future in cf.as_completed(self.futures)]
         else:
             self.results = self.futures
         self.endtime = time()
@@ -217,6 +273,7 @@ class Engine:
                 f" `pip install adparallelengine[k8s]`.\n\nOriginal error was {str(e)}"
             )
 
+    # noinspection PyUnresolvedReferences
     def __init__(
         self,
         kind: str,
@@ -419,46 +476,36 @@ class Engine:
         """True if `adparallelengine.adparallelengine.Engine.kind` is anything but 'serial'"""
         return self._kind != "serial"
 
+    # noinspection PyUnresolvedReferences
     @property
     def client(self) -> Union[None, "Client"]:
         """Dask client, if using Dask or Dask-Kubernetes"""
         return dask_client
 
-    def _make_counter(self, collection, method_name):
-        """Determines which processes should say they are done based on
-        `adparallelengine.adparallelengine.Engine.print_percent`"""
-        if self._print_percent is None:
-            return {}
-        nitems = len(collection)
-        dt = int(nitems / self._print_percent)
-        if nitems < self._print_percent:
-            dt = 1
-        indexes_to_print = {
-            i: f"{method_name} : {i}/{nitems}, {round(100 * i / nitems, 2)}%" for i in list(range(dt, nitems + 1, dt))
-        }
-        return indexes_to_print
-
-    def _treat_serial(self, collection, method, kwargs) -> list:
+    def _treat_serial(self, iterable, method, kwargs) -> list:
         """Launches the method in a serial run"""
         if self.verbose is True:
             logger.info("Computation is not parallel")
         t = time()
-        results = [self._pre_launch(e, method, False, kwargs) for e in collection]
+        results = [self._pre_launch(e, method, False, kwargs) for e in iterable]
 
         return self._finish_job(
             _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=False)
         )
 
-    def _treat_dask(self, collection, method, batched, kwargs) -> list:
+    def _treat_dask(self, iterable, method, batched, kwargs) -> list:
         """Launches the method in a dask run"""
         t = time()
-        results = self.client.map(self._pre_launch, collection, method=method, batched=batched, kwargs=kwargs)
+        results = [
+            self.client.submit(self._pre_launch, elem, method=method, batched=batched, kwargs=kwargs)
+            for elem in iterable
+        ]
 
         return self._finish_job(
             _Job(results=results, client=self.client, method_name=method.__name__, starttime=t, batched=batched)
         )
 
-    def _treat_mpi(self, max_workers, collection, method, batched, kwargs) -> list:
+    def _treat_mpi(self, max_workers, iterable, method, batched, kwargs) -> list:
         """Launches the method in a MPI run"""
         if self.verbose is True:
             logger.info(f"Using at most {max_workers} mpi processes")
@@ -466,13 +513,13 @@ class Engine:
 
         # noinspection PyCallingNonCallable
         with Engine.MPIPOOLEXECUTOR(max_workers=max_workers) as executor:
-            results = list(executor.map(self._pre_launch, collection, repeat(method), repeat(batched), repeat(kwargs)))
+            results = [executor.submit(self._pre_launch, elem, method, batched, kwargs) for elem in iterable]
 
         return self._finish_job(
             _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
         )
 
-    def _treat_concurrent_or_threads(self, max_workers, collection, method, batched, kwargs) -> list:
+    def _treat_concurrent_or_threads(self, max_workers, iterable, method, batched, kwargs) -> list:
         """Launches the method in a multiprocess or multithread run"""
         t = time()
 
@@ -480,17 +527,17 @@ class Engine:
             if self.verbose is True:
                 logger.info(f"Using at most {max_workers} processes")
             with ProcessPoolExecutor(max_workers=max_workers, mp_context=get_context(self._context)) as executor:
-                results = list(
-                    executor.map(self._pre_launch, collection, repeat(method), repeat(batched), repeat(kwargs))
-                )
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
         else:
             # No max cpus in using threads
             if self.verbose is True:
-                logger.info(f"Using at most {len(collection)} threads")
-            with ThreadPoolExecutor(max_workers=len(collection)) as executor:
-                results = list(
-                    executor.map(self._pre_launch, collection, repeat(method), repeat(batched), repeat(kwargs))
-                )
+                logger.info(f"Using at most {len(iterable)} threads")
+            with ThreadPoolExecutor(max_workers=len(iterable)) as executor:
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
 
         return self._finish_job(
             _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
@@ -551,7 +598,7 @@ class Engine:
                     logger.info(f"Using dask kubernetes: visit {self.client.dashboard_link} to monitor progression.")
                 self.__new = False
 
-    def __call__(self, method: Callable, collection: Collection, **kwargs) -> list:
+    def __call__(self, method: Callable, iterable: Iterable, length: Optional[int] = None, **kwargs) -> list:
         """
         kwargs reserved for the engine:
         * batched (bool), to batch the items in 'collection'. Uses
@@ -571,8 +618,12 @@ class Engine:
         ----------
         method: Callable
             The method to run
-        collection: Collection
-            The collection object containing the items to pass to the method
+        iterable: Iterable
+            The iterable object containing the items to pass to the method. Can be a generator.
+        length: Optional[int]
+            Length if the collection. If not specified, the collection must define __len__ (i.e can not be a simple
+            iterator). If the collection is large and contains large object, it can speed up the process to give its
+            length explicitely here.
         kwargs
 
         Returns
@@ -583,14 +634,14 @@ class Engine:
 
         # Make str for progress monitoring
 
+        iterable = CustomIterator(
+            iterable=iterable, length=length, method_name=method.__name__, print_percent=self._print_percent
+        )
+
         if self.verbose is True:
-            logger.info(f"Iterable has a length of {len(collection)}")
-        indexes_to_print = self._make_counter(collection, method.__name__)
-        collection = [
-            (item, None) if i + 1 not in indexes_to_print else (item, indexes_to_print[i + 1])
-            for i, item in enumerate(collection)
-        ]
-        if len(collection) == 0:
+            logger.info(f"Iterable has a length of {iterable.length}")
+
+        if length == 0:
             if self.verbose is True:
                 logger.info(f"Iterable is empty. Not calling method '{method.__name__}'.")
             return []
@@ -620,7 +671,7 @@ class Engine:
         max_workers = None
         if self._kind != "mpi" and self.is_parallel:
             max_workers = min(
-                cpu_count() - 1 if not cpu_limit > 0 else cpu_limit - 1, max(len(collection), 1)
+                cpu_count() - 1 if not cpu_limit > 0 else cpu_limit - 1, max(iterable.length, 1)
             )  # -1 because main process will need one
         elif self._kind == "mpi":
             # noinspection PyUnresolvedReferences
@@ -628,7 +679,7 @@ class Engine:
             if self.verbose is True:
                 logger.info(f"MPI comm world size is {Engine.MPI.COMM_WORLD.size}")
             # noinspection PyUnresolvedReferences
-            max_workers = min(Engine.MPI.COMM_WORLD.size, max(len(collection), 1))
+            max_workers = min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1))
 
         if self._max_workers is not None and max_workers is not None:
             max_workers = min(max_workers, self._max_workers)
@@ -644,22 +695,22 @@ class Engine:
 
         # Check if must and can be batched
 
-        collection, batched = self._manage_batched_before(collection, batched, max_workers)
+        iterable, batched = self._manage_batched_before(iterable, batched, max_workers)
 
         # Launch computation depending on engine kind
 
         if not self.is_parallel or max_workers == 1:
             # noinspection PyTypeChecker
-            result = self._treat_serial(collection, method, kwargs)
+            result = self._treat_serial(iterable, method, kwargs)
         elif self._kind == "dask":
             # noinspection PyTypeChecker
-            result = self._treat_dask(collection, method, batched, kwargs)
+            result = self._treat_dask(iterable, method, batched, kwargs)
         elif self._kind == "mpi":
             # noinspection PyTypeChecker
-            result = self._treat_mpi(max_workers, collection, method, batched, kwargs)
+            result = self._treat_mpi(max_workers, iterable, method, batched, kwargs)
         elif self._kind == "concurrent" or self._kind == "multiproc" or self._kind == "multithread":
             # noinspection PyTypeChecker
-            result = self._treat_concurrent_or_threads(max_workers, collection, method, batched, kwargs)
+            result = self._treat_concurrent_or_threads(max_workers, iterable, method, batched, kwargs)
         else:
             raise ValueError(f"Unexpected kind {self._kind}")
 
@@ -713,8 +764,8 @@ class Engine:
                     kwargs["share"][item] = (p, thetype)
 
     def _manage_batched_before(
-        self, collection: Collection, batched: Union[int, bool], workers: int
-    ) -> Tuple[Collection, bool]:
+        self, iterable: CustomIterator, batched: Union[int, bool], workers: int
+    ) -> Tuple[Iterable, bool]:
         """If 'batched' was given to the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
         it.
 
@@ -727,7 +778,7 @@ class Engine:
 
         Parameters
         ----------
-        collection: Collection
+        iterable: Collection
         batched: Union[int, bool]
         workers: int
 
@@ -738,38 +789,38 @@ class Engine:
             returns (np.array_split(collection, nbatches), True)
         """
         if workers is None:
-            return collection, False
+            return iterable, False
         use_batch_multiplier = True
         if isinstance(batched, int) and not isinstance(batched, bool):
-            chunksize = min(len(collection), abs(batched))
+            chunksize = min(iterable.length, abs(batched))
             if chunksize <= 0:
                 chunksize = 1
             if chunksize == 1:
                 batched = False
             else:
                 batched = True
-            nbatches = math.ceil(len(collection) / chunksize)
+            nbatches = math.ceil(iterable.length / chunksize)
             use_batch_multiplier = False
             if self.verbose is True:
                 logger.info(
-                    f"Batching {len(collection)} objects into {nbatches}"
+                    f"Batching {iterable.length} objects into {nbatches}"
                     f" batched of user-specified chunk size~{chunksize}"
                 )
         else:
             nbatches = workers
         if batched is True:
-            if len(collection) <= nbatches or nbatches == 1:
-                return collection, False
+            if iterable.length <= nbatches or nbatches == 1:
+                return iterable, False
             else:
                 if self._batch_multiplier is not None and use_batch_multiplier:
-                    nbatches = min(len(collection), self._batch_multiplier * nbatches)
+                    nbatches = min(iterable.length, self._batch_multiplier * nbatches)
                 if self.verbose is True:
-                    logger.info(f"Batching {len(collection)} objects into {nbatches} batches")
+                    logger.info(f"Batching {iterable.length} objects into {nbatches} batches")
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore", category=np.VisibleDeprecationWarning)
-                    collection = np.array_split(collection, nbatches)
-                return collection, True
-        return collection, False
+                    iterable = iterable.split(nbatches)
+                return iterable, True
+        return iterable, False
 
     def _pre_launch(self, elements, method, batched, kwargs):
         """Method passed to the underlying engine (multiproc, dask, mpi...)
@@ -795,9 +846,7 @@ class Engine:
                     if "init_method" in kwargs:
                         if "method" not in kwargs["init_method"]:
                             raise ValueError("If using kwarg 'init_method' in Engine, must specify the 'method' key")
-                        if item in dict(
-                            inspect.signature(kwargs["init_method"]["method"]).parameters
-                        ):
+                        if item in dict(inspect.signature(kwargs["init_method"]["method"]).parameters):
                             in_init_method = True
                     if not in_init_method and not in_method:
                         raise ValueError(
@@ -828,9 +877,7 @@ class Engine:
                 if "init_method" in kwargs:
                     if "method" not in kwargs["init_method"]:
                         raise ValueError("If using kwarg 'init_method' in Engine, must specify the 'method' key")
-                    if item in dict(
-                            inspect.signature(kwargs["init_method"]["method"]).parameters
-                    ):
+                    if item in dict(inspect.signature(kwargs["init_method"]["method"]).parameters):
                         in_init_method = True
                 if not in_init_method and not in_method:
                     raise ValueError(f"Keyword argument {item} is not valid for the given method and init_method")
