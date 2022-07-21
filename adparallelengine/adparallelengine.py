@@ -894,6 +894,7 @@ class Engine:
                     kwargs["init_method"]["method"]()
                 del kwargs["init_method"]
 
+            print(elements)
             if not batched:
                 return _launch(method, elements, kwargs)
 
