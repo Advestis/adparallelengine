@@ -898,6 +898,8 @@ class Engine:
             if not batched:
                 return _launch(method, elements, kwargs)
 
+            print("ha!")
+
             to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements], dtype="object").T
 
             return to_ret, times, mems
