@@ -910,6 +910,7 @@ class Engine:
 
 def _launch(method, element, kwargs):
     """Where the method is actually called on an element of the original collection"""
+    print("coucou", element)
     element, toprint = element
     t = time()
     if Engine.TRACEMALLOC is True:
