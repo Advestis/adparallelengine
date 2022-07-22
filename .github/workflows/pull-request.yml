@@ -74,6 +74,6 @@ jobs:
         run: |
           echo "virtualenv: $VIRTUAL_ENV"
           ls /bin/pyth*
-          mpirun PYTHONPATH=./ $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
+          mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
           pytest --tests-per-worker auto -s -v -k test_serial
           pytest -s -v -k "not test_serial"

@@ -109,7 +109,7 @@ def start(which, gather, batched, share, generator, max_cpu):
             return
         assert (
             os.system(
-                f"PYTHONPATH=./ mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py"
+                f"mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py"
                 f" {which} {gather} {batched} {share} {generator} {max_cpu}"
             )
             == 0
