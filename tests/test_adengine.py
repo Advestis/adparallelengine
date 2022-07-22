@@ -7,8 +7,28 @@ import pytest
     (True, False),
 )
 @pytest.mark.parametrize(
-    "which",
-    ("serial", "multiproc", "concurrent", "dask")  # , "mpi"),
+    "batched",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "share",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "generator",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "max_cpu",
+    ("None", 1),
+)
+def test_serial(gather, batched, share, generator, max_cpu):
+    start("serial", gather, batched, share, generator, max_cpu)
+
+
+@pytest.mark.parametrize(
+    "gather",
+    (True, False),
 )
 @pytest.mark.parametrize(
     "batched",
@@ -18,10 +38,43 @@ import pytest
     "share",
     (True, False),
 )
-def test_engine(which, gather, batched, share):
-    if which != "mpi":
-        assert os.system(f"python tests/main.py {which} {gather} {batched} {share}") == 0
-    else:
-        assert os.system(
-            f"mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py {which} {gather} {batched} {share}"
-        ) == 0
+@pytest.mark.parametrize(
+    "generator",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "max_cpu",
+    ("None", 1),
+)
+def test_multiproc(gather, batched, share, generator, max_cpu):
+    start("multiproc", gather, batched, share, generator, max_cpu)
+
+
+@pytest.mark.parametrize(
+    "gather",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "batched",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "share",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "generator",
+    (True, False),
+)
+@pytest.mark.parametrize(
+    "max_cpu",
+    ("None", 1),
+)
+def test_dask(gather, batched, share, generator, max_cpu):
+    start("dask", gather, batched, share, generator, max_cpu)
+
+
+def start(which, gather, batched, share, generator, max_cpu):
+    assert os.system(
+        f"PYTHONPATH=./ python tests/main.py {which} {gather} {batched} {share} {generator} {max_cpu}"
+    ) == 0

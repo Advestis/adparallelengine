@@ -73,6 +73,40 @@ if __name__ == "__main__":
     )
 ```
 
+Note that AdParallelEngine **supports generators** if the *length* argument is given : 
+
+```python
+from adparallelengine import Engine
+
+def dummy_prod(xx):
+    return 2 * xx
+
+def fib(limit):
+    """Fibonacci generator"""
+    a, b = 0, 1
+    while a < limit:
+        yield a
+        a, b = b, a + b
+
+x = fib(25)  # will have 9 elements: 0, 1, 1, 2, 3, 5, 8, 13, 21
+
+if __name__ == "__main__":
+    which = "multiproc"  # Can also be "serial", "dask", "mpi" or "k8s"
+    engine = Engine(
+        kind=which,
+        # max_workers=10  One can limit the number of workers. By default, os.cpu_count() or MPI.COMM_WORLD.size is used
+    )
+    results = engine(
+        dummy_prod,
+        x,
+        length=9,
+        batch=4
+    )
+```
+
+At no moment the engine will cast it to list, instead a custom iterator class is created to properly batch the generator
+and loop through it only once, when the computation actually happens.
+
 ### Gathering
 
 Results will be a list of tuples, each containing two dataframes, because `method` returns a tuple of two dataframes.
