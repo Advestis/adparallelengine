@@ -1,6 +1,7 @@
 import os
 import pytest
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 @pytest.mark.parametrize(
     "gather",
@@ -19,14 +20,18 @@ import pytest
     "generator",
     (True, False),
 )
-def test_engine(which, gather, batched, share, generator):
+@pytest.mark.parametrize(
+    "max_cpu",
+    (2, "None", 1),
+)
+def test_engine(which, gather, batched, share, generator, max_cpu):
     if which != "mpi":
-        assert os.system(f"python tests/main.py {which} {gather} {batched} {share} {generator}") == 0
+        assert os.system(f"python tests/main.py {which} {gather} {batched} {share} {generator} {max_cpu}") == 0
     else:
         assert (
             os.system(
                 f"mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py"
-                f" {which} {gather} {batched} {share} {generator}"
+                f" {which} {gather} {batched} {share} {generator} {max_cpu}"
             )
             == 0
         )

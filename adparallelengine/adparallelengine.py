@@ -308,7 +308,7 @@ class Engine:
             If 'verbose' is True, processes matching 'print_percent' percent will say it when they finished. If None,
             processes do not say anything (Default value = 10).
         max_workers: Optional[int]
-            To limit the number of CPUs to use. If < 1, uses os.cpu_count().
+            To limit the number of CPUs to use. If < 1 or None, uses os.cpu_count().
         path_shared: Optional["TransparentPath"]
             To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
             processes read them by sharing a path instead of the heavy object itself. 'path_shared' tells the engine
@@ -590,9 +590,11 @@ class Engine:
             if self.verbose is True:
                 logger.info("Using kubernetes cluster")
             if self.__new:
-                self.docker_image = f"{os.environ['ADLEARN_DOCKER_IMAGE']}:{os.environ['ADLEARN_TAG']}"
+                self.docker_image = (
+                    f"{os.environ['ADPARALLELENGINE_DOCKER_IMAGE']}:{os.environ['ADPARALLELENGINE_TAG']}"
+                )
                 cluster = Engine.K8S_CLUSTER.from_dict(self.k8s_spec_dict)
-                cluster.adapt(minimum=1, maximum=int(os.getenv("ADLEARN_DASK_KUBE_MAX_PODS", "50")))
+                cluster.adapt(minimum=1, maximum=int(os.getenv("ADPARALLELENGINE_DASK_KUBE_MAX_PODS", "50")))
                 dask_client = Engine.DASK_CLIENT(cluster)
                 if self.verbose is True:
                     logger.info(f"Using dask kubernetes: visit {self.client.dashboard_link} to monitor progression.")
@@ -664,29 +666,32 @@ class Engine:
 
         # Get number of workers
 
-        cpu_limit = int(os.getenv("ADLEARN_LIMIT_CPU", "0"))
-        if cpu_limit == 1:
-            self._kind = "serial"
+        kind = self._kind
+        max_workers = self._max_workers if self._max_workers is not None else 0
+        if max_workers < 0:
+            max_workers = 0
 
-        max_workers = None
-        if self._kind != "mpi" and self.is_parallel:
-            max_workers = min(
-                cpu_count() - 1 if not cpu_limit > 0 else cpu_limit - 1, max(iterable.length, 1)
-            )  # -1 because main process will need one
-        elif self._kind == "mpi":
+        if max_workers is not None and max_workers == 1:
+            kind = "serial"
+
+        if kind != "mpi" and self.is_parallel:
+            if max_workers != 0:
+                max_workers = min(max_workers, min(cpu_count(), max(iterable.length, 1)))
+            else:
+                max_workers = min(cpu_count(), max(iterable.length, 1))
+        elif kind == "mpi":
             # noinspection PyUnresolvedReferences
             Engine.import_mpi()
             if self.verbose is True:
                 logger.info(f"MPI comm world size is {Engine.MPI.COMM_WORLD.size}")
-            # noinspection PyUnresolvedReferences
-            max_workers = min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1))
-
-        if self._max_workers is not None and max_workers is not None:
-            max_workers = min(max_workers, self._max_workers)
+            if max_workers != 0:
+                min(max_workers, min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1)))
+            else:
+                max_workers = min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1))
 
         # Dask must be initialised before _manage_shared, for self._client must not be None
 
-        if self._kind == "dask" or self.kind == "kubernetes":
+        if kind == "dask" or self.kind == "kubernetes":
             self._init_dask(max_workers)
 
         # Manage shared kwargs
@@ -694,25 +699,25 @@ class Engine:
         self._manage_shared(kwargs)
 
         # Check if must and can be batched
-
-        iterable, batched = self._manage_batched_before(iterable, batched, max_workers)
+        if kind != "serial":
+            iterable, batched = self._manage_batched_before(iterable, batched, max_workers)
 
         # Launch computation depending on engine kind
 
-        if not self.is_parallel or max_workers == 1:
+        if kind == "serial":
             # noinspection PyTypeChecker
             result = self._treat_serial(iterable, method, kwargs)
-        elif self._kind == "dask":
+        elif kind == "dask":
             # noinspection PyTypeChecker
             result = self._treat_dask(iterable, method, batched, kwargs)
-        elif self._kind == "mpi":
+        elif kind == "mpi":
             # noinspection PyTypeChecker
             result = self._treat_mpi(max_workers, iterable, method, batched, kwargs)
-        elif self._kind == "concurrent" or self._kind == "multiproc" or self._kind == "multithread":
+        elif kind == "concurrent" or kind == "multiproc" or kind == "multithread":
             # noinspection PyTypeChecker
             result = self._treat_concurrent_or_threads(max_workers, iterable, method, batched, kwargs)
         else:
-            raise ValueError(f"Unexpected kind {self._kind}")
+            raise ValueError(f"Unexpected kind {kind}")
 
         if gather is True:
             if gather_method is not None:
@@ -791,6 +796,7 @@ class Engine:
         if workers is None:
             return iterable, False
         use_batch_multiplier = True
+        printed = False
         if isinstance(batched, int) and not isinstance(batched, bool):
             chunksize = min(iterable.length, abs(batched))
             if chunksize <= 0:
@@ -802,6 +808,7 @@ class Engine:
             nbatches = math.ceil(iterable.length / chunksize)
             use_batch_multiplier = False
             if self.verbose is True:
+                printed = True
                 logger.info(
                     f"Batching {iterable.length} objects into {nbatches}"
                     f" batched of user-specified chunk size~{chunksize}"
@@ -814,7 +821,7 @@ class Engine:
             else:
                 if self._batch_multiplier is not None and use_batch_multiplier:
                     nbatches = min(iterable.length, self._batch_multiplier * nbatches)
-                if self.verbose is True:
+                if self.verbose is True and printed is False:
                     logger.info(f"Batching {iterable.length} objects into {nbatches} batches")
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore", category=np.VisibleDeprecationWarning)
@@ -894,11 +901,8 @@ class Engine:
                     kwargs["init_method"]["method"]()
                 del kwargs["init_method"]
 
-            print("cucul", elements)
             if not batched:
                 return _launch(method, elements, kwargs)
-
-            print("ha!")
 
             to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements], dtype="object").T
 
@@ -913,7 +917,6 @@ class Engine:
 
 def _launch(method, element, kwargs):
     """Where the method is actually called on an element of the original collection"""
-    print("coucou", element)
     element, toprint = element
     t = time()
     if Engine.TRACEMALLOC is True:

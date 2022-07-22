@@ -48,12 +48,14 @@ if __name__ == "__main__":
     batched = True if sys.argv[3] == "True" else False if sys.argv[3] == "False" else int(sys.argv[3])
     share = True if sys.argv[4] == "True" else False
     generator = True if sys.argv[5] == "True" else False
+    max_cpu = None if sys.argv[6] == "None" else int(sys.argv[6])
 
     print("which", which)
     print("gather", gather)
     print("batched", batched)
     print("share", share)
     print("generator", generator)
+    print("max_cpu", max_cpu)
 
     if not generator:
 
@@ -74,7 +76,7 @@ if __name__ == "__main__":
             share_kwargs = {"share": {"some_other_stuff": s}}
         else:
             share_kwargs = {"some_other_stuff": s}
-        engine = Engine(kind=which, path_shared=Path("tests") / "data" / "shared")
+        engine = Engine(kind=which, path_shared=Path("tests") / "data" / "shared", max_workers=max_cpu)
         res = engine(
             method,
             dfs,
@@ -117,7 +119,7 @@ if __name__ == "__main__":
     else:
 
         x = fib(25)  # will have 5 elements: (0, 1), (1, 2), (3, 5), (8, 13), (21, 34)
-        engine = Engine(kind=which, path_shared=Path("tests") / "data" / "shared")
+        engine = Engine(kind=which, path_shared=Path("tests") / "data" / "shared", max_workers=max_cpu)
         results = engine(dummy_prod, x, length=5, batched=2 if batched is True else False, gather=gather)
         if engine.path_shared.isdir():
             assert len(list(engine.path_shared.ls())) == 0

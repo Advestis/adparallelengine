@@ -11,7 +11,7 @@ name: pytests
 jobs:
 
   check:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest  # use macos to have 3 CPUs instead of 2
     steps:
       - uses: 8BitJonny/gh-get-current-pr@2.0.0
         id: PR
