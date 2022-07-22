@@ -58,7 +58,7 @@ jobs:
           mpi: "openmpi"
 
       - name: test mpi
-        run: mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
+        run: mpirun python -m mpi4py.futures tests/main.py
 
       - uses: actions/cache@v2
         with:
