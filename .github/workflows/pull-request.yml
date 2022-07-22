@@ -55,6 +55,9 @@ jobs:
 
       - uses: mpi4py/setup-mpi@v1
 
+      - name: test mpi
+        run: mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
+
       - uses: actions/cache@v2
         with:
           path: ${{ env.pythonLocation }}
@@ -68,12 +71,10 @@ jobs:
           pip install --upgrade --upgrade-strategy eager pytest-gitignore
           pip install --upgrade --upgrade-strategy eager pytest-github-actions-annotate-failures
           pip install --upgrade --upgrade-strategy eager pytest-parallel
-          pip install --upgrade --upgrade-strategy eager .[all]
+          pip install --upgrade --upgrade-strategy eager .[dask,support_shared]
 
       - name: Test with pytest
         run: |
-          echo "virtualenv: $VIRTUAL_ENV"
-          ls /bin/pyth*
           mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
           pytest --tests-per-worker auto -s -v -k test_serial
           pytest -s -v -k "not test_serial"
