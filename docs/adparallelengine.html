@@ -1,0 +1,2850 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>adparallelengine.adparallelengine API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>adparallelengine.adparallelengine</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import inspect
+import numpy as np
+import math
+import os
+import warnings
+import traceback as tb
+from time import time
+from typing import Callable, Optional, Tuple, Union, Iterable
+import concurrent.futures as cf
+
+from multiprocessing import get_context, cpu_count
+import logging
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, Future
+from tempfile import gettempdir
+import tracemalloc
+from itertools import islice
+
+from .decorators import classproperty
+
+logger = logging.getLogger(__name__)
+
+dask_client = None
+&#34;&#34;&#34;Dask client must be global. Only used if using Dask or Dask-Kubernetes&#34;&#34;&#34;
+
+
+def to_bool(s: str):
+    s = s.replace(&#34; &#34;, &#34;&#34;).split(&#34;#&#34;)[0]
+    if s.lower() == &#34;false&#34; or s == &#34;&#34;:
+        return False
+    if s.lower() == &#34;true&#34;:
+        return True
+    raise ValueError(f&#34;Can not convert string {s} to bool&#34;)
+
+
+class CustomIterator:
+    def __init__(
+        self,
+        iterable: Iterable,
+        method_name: str = &#34;method&#34;,
+        print_percent: Union[None, int] = 10,
+        length: Optional[int] = None,
+    ):
+        self.iterable = iterable
+        if length is None:
+            if not hasattr(iterable, &#34;__len__&#34;):
+                raise TypeError(
+                    &#34;If the length of the iterable is not specified, it must implement the &#39;__len__&#39; method&#34;
+                )
+            # noinspection PyTypeChecker
+            self.length = len(iterable)
+        else:
+            self.length = length
+
+        if print_percent is not None:
+            dt = int(self.length / print_percent)
+            if self.length &lt; print_percent:
+                dt = 1
+            self.indexes_to_print = {
+                i: f&#34;{method_name} : {i}/{self.length}, {round(100 * i / self.length, 2)}%&#34;
+                for i in list(range(dt, self.length + 1, dt))
+            }
+        else:
+            self.indexes_to_print = {}
+
+    def __len__(self):
+        return self.length
+
+    def __iter__(self):
+        for i, elem in enumerate(self.iterable):
+            if i + 1 in self.indexes_to_print:
+                yield elem, self.indexes_to_print[i + 1]
+            else:
+                yield elem, None
+
+    def split(self, nbatches: int):
+        batch_size = self.length // nbatches
+        iterator = iter(self)
+        for first in iterator:
+
+            def chunk():
+                yield first
+                for more in islice(iterator, batch_size - 1):
+                    yield more
+
+            yield [e for e in chunk()]
+
+
+class _Job:
+    def __init__(self, results, client, method_name, starttime, batched):
+        self.futures = results
+        self.client = client
+        self.method_name = method_name
+        self.starttime = starttime
+        self.endtime = None
+        self.runtime = None
+        self.times = []
+        self.peak_mem_allocations = []
+        self.results = []
+        self.batched = batched
+
+    def gather(self):
+        if self.client is not None:
+            self.results = self.client.gather(self.futures)
+        elif isinstance(self.futures[0], Future):
+            self.results = [future.result() for future in cf.as_completed(self.futures)]
+        else:
+            self.results = self.futures
+        self.endtime = time()
+        self.runtime = self.endtime - self.starttime
+        self.results, self.times, self.peak_mem_allocations = zip(*self.results)
+        if self.batched:
+            self.results = [item for subl in self.results for item in subl]
+            self.times = [item for subl in self.times for item in subl]
+            self.peak_mem_allocations = [item / 1e9 for subl in self.peak_mem_allocations for item in subl]
+        else:
+            self.peak_mem_allocations = [item / 1e9 for item in self.peak_mem_allocations]
+
+
+class Engine:
+    &#34;&#34;&#34;Wrapper around several ways of doing parallel runs in Python
+
+    Can be a &#39;serial&#39; engine, which does not do parallel runs, can use concurrent.futures with processes or threads,
+    can use Dask, Dask-Kubernetes and MPI.
+
+    Attributes
+    ----------
+    kind: str
+        Can be any of &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;.
+        &#34;concurrent&#34; and &#34;multiproc&#34; are synonymes.
+    batch_multiplier: Optional[int]
+         Number of items to pass to each process if doing batched multiprocessing
+    docker_image: Optional[str]
+        If using Dask-Kubernetes, docker image of the main program
+    context: str
+        Multiprocessing context. Can be &#34;spawn&#34; (default) or &#34;fork&#34;, use &#34;spawn&#34; if your paralleled processes use
+        numpy.
+    processes_or_threads: str
+        Can be &#34;processes&#34; (default) or &#34;threads&#34;. Only relevent if `adparallelengine.adparallelengine.Engine.kind`
+        is &#39;Dask&#39;.
+    print_percent: int
+        If &#39;verbose&#39; is True, processes matching &#39;print_percent&#39; percent will say it when they finished. If None,
+        processes do not say anything (Default value = 10).
+    max_workers: Optional[int]
+        To limit the number of CPUs to use. If &lt; 1, uses os.cpu_count().
+    path_shared: Optional[&#34;TransparentPath&#34;]
+        To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+        processes read them by sharing a path instead of the heavy object itself. &#39;path_shared&#39; tells the engine
+        where those shared objects should be written. Defaults to &#34;tempfile.gettempdir() / adparallelengine_temp&#34;.
+    k8s_spec_dict: Optional[dict]
+        If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
+    verbose: bool
+    times: dict
+        Dictionnary of &#39;method_name&#39;: [run times]
+    peak_mem_allocations: dict
+        Dictionnary of &#39;method_name&#39;: [Max memory usage]
+    &#34;&#34;&#34;
+
+    kinds = [&#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;]
+    _MPI, _MPIPOOLEXECUTOR = None, None
+    _DASK_CLIENT = None
+    _K8S_CLUSTER = None
+    _PANDAS = None
+    _PATH = None
+    TRACEMALLOC = True
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def MPI(cls):
+        if cls._MPI is None:
+            cls.import_mpi()
+        return cls._MPI
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def MPIPOOLEXECUTOR(cls):
+        if cls._MPIPOOLEXECUTOR is None:
+            cls.import_mpi()
+        return cls._MPIPOOLEXECUTOR
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def PANDAS(cls):
+        if cls._PANDAS is None:
+            cls.import_pandas()
+        return cls._PANDAS
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def PATH(cls):
+        if cls._PATH is None:
+            cls.import_transparentpath()
+        return cls._PATH
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def DASK_CLIENT(cls):
+        if cls._DASK_CLIENT is None:
+            cls.import_dask()
+        return cls._DASK_CLIENT
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def K8S_CLUSTER(cls):
+        if cls._K8S_CLUSTER is None:
+            cls.import_k8s()
+        return cls._K8S_CLUSTER
+
+    @classmethod
+    def import_mpi(cls):
+        try:
+            import mpi4py.rc
+
+            mpi4py.rc.threads = False
+            from mpi4py import MPI
+            from mpi4py.futures import MPIPoolExecutor
+
+            cls._MPI, cls._MPIPOOLEXECUTOR = MPI, MPIPoolExecutor
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import mpi4py. You can do it by running `pip install adparallelengine[mpi]`.&#34;
+                &#34; Make sure also that MPI is installed on your computer (OpenMPI should work)\n\n&#34;
+                f&#34;Original error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_pandas(cls):
+        try:
+            import pandas as pd
+
+            cls._PANDAS = pd
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import pandas. You can do it by running&#34;
+                f&#34; `pip install adparallelengine[support_shared]`.\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_transparentpath(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from transparentpath import Path
+
+            cls._PATH = Path
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import transparentpath. You can do it by running&#34;
+                f&#34;`pip install adparallelengine[support_shared]` .\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_dask(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from dask.distributed import Client
+
+            cls._DASK_CLIENT = Client
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import dask. You can do it by running `pip install adparallelengine[dask]`.&#34;
+                f&#34;\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_k8s(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from dask_kubernetes import KubeCluster
+
+            cls._K8S_CLUSTER = KubeCluster
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can not import dask_kubernetes. You can do it by running&#34;
+                f&#34; `pip install adparallelengine[k8s]`.\n\nOriginal error was {str(e)}&#34;
+            )
+
+    # noinspection PyUnresolvedReferences
+    def __init__(
+        self,
+        kind: str,
+        batch_multiplier: Optional[int] = None,
+        docker_image: Optional[str] = None,
+        context: str = &#34;spawn&#34;,
+        processes_or_threads: str = &#34;processes&#34;,
+        print_percent: int = 10,
+        max_workers: Optional[int] = None,
+        path_shared: Optional[&#34;TransparentPath&#34;] = None,
+        k8s_spec_dict: Optional[dict] = None,
+        verbose: bool = True,
+    ):
+        &#34;&#34;&#34;
+
+        Parameters
+        ----------
+        kind: str
+            Can be any of &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;.
+            &#34;concurrent&#34; and &#34;multiproc&#34; are synonymes.
+        batch_multiplier: Optional[int]
+             Number of items to pass to each process if doing batched multiprocessing
+        docker_image: Optional[str]
+            If using Dask-Kubernetes, docker image of the main program
+        context: str
+            Multiprocessing context. Can be &#34;spawn&#34; (default) or &#34;fork&#34;, use &#34;spawn&#34; if your paralleled processes use
+            numpy.
+        processes_or_threads: str
+            Can be &#34;processes&#34; (default) or &#34;threads&#34;. Only relevent if `adparallelengine.adparallelengine.Engine.kind`
+            is &#39;Dask&#39;.
+        print_percent: int
+            If &#39;verbose&#39; is True, processes matching &#39;print_percent&#39; percent will say it when they finished. If None,
+            processes do not say anything (Default value = 10).
+        max_workers: Optional[int]
+            To limit the number of CPUs to use. If &lt; 1 or None, uses os.cpu_count().
+        path_shared: Optional[&#34;TransparentPath&#34;]
+            To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+            processes read them by sharing a path instead of the heavy object itself. &#39;path_shared&#39; tells the engine
+            where those shared objects should be written. Defaults to &#34;tempfile.gettempdir() / adparallelengine_temp&#34;.
+        k8s_spec_dict: Optional[dict]
+            If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
+        verbose: bool
+        &#34;&#34;&#34;
+        self._kind = None
+        self._batch_multiplier = None
+        self.docker_image = docker_image
+        &#34;&#34;&#34;If using Dask-Kubernetes, docker image of the main program&#34;&#34;&#34;
+        self._context = None
+        self._processes_or_threads = None
+        self._print_percent = None
+        self._max_workers = None
+        self._path_shared = None
+
+        self.kind = kind
+        self.batch_multiplier = batch_multiplier
+        self.context = context
+        self.processes_or_workers = processes_or_threads
+        self.print_percent = print_percent if verbose is True else None
+        self.max_workers = max_workers
+        self.path_shared = path_shared
+        self._prev_print_percent = self.print_percent
+        self._verbose = verbose
+
+        self.__new = True
+        self.times = {}
+        &#34;&#34;&#34;Dictionnary of run times of the various methods that have been ran through this engine&#34;&#34;&#34;
+        self.peak_mem_allocations = {}
+        &#34;&#34;&#34;Dictionnary of maximum memory usage of the various methods that have been ran through this engine&#34;&#34;&#34;
+
+        self.path_shared = None
+        &#34;&#34;&#34;Where the shared objects should be written&#34;&#34;&#34;
+        if path_shared is not None:
+            self.path_shared = path_shared
+
+        self.k8s_spec_dict = k8s_spec_dict
+        &#34;&#34;&#34;If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.&#34;&#34;&#34;
+
+    def clean_shared(self):
+        &#34;&#34;&#34;Removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+        if self.path_shared is not None:
+            self.path_shared.rm(absent=&#34;ignore&#34;, ignore_kind=True)
+
+    def close(self):
+        &#34;&#34;&#34;If using Dask or Dask-Kubernetes, closes the client. Also, removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+        if self.client is not None:
+            self.client.close()
+
+        self.clean_shared()
+
+    @property
+    def path_shared(self):
+        return self._path_shared
+
+    @path_shared.setter
+    def path_shared(self, path_shared):
+        if self.kind == &#34;serial&#34;:
+            self._path_shared = None
+            return
+        if path_shared is None:
+            path_shared = self.__class__.PATH(gettempdir(), fs=&#34;local&#34;) / &#34;adparallelengine_temp&#34;
+        if str(path_shared) == str(self.__class__.PATH(gettempdir(), fs=&#34;local&#34;)):
+            path_shared = self.__class__.PATH(gettempdir(), fs=&#34;local&#34;) / &#34;adparallelengine_temp&#34;
+            logger.warning(
+                &#34;Can not use default tempdir as shared directory for adparellelengine, since it would be deleted after&#34;
+                f&#34; the run. Using {path_shared} instead.&#34;
+            )
+        if not path_shared.isdir():
+            path_shared.mkdir()
+        self._path_shared = path_shared
+
+    @property
+    def kind(self):
+        &#34;&#34;&#34;Can be &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34; &#34;&#34;&#34;
+        return self._kind
+
+    @kind.setter
+    def kind(self, value):
+        if value not in Engine.kinds:
+            raise ValueError(f&#34;Unknown engine kind {value}&#34;)
+        self._kind = value
+
+    @property
+    def batch_multiplier(self):
+        &#34;&#34;&#34;Number of items to pass to each process if doing batched multiprocessing&#34;&#34;&#34;
+        return self._kind
+
+    @batch_multiplier.setter
+    def batch_multiplier(self, value):
+        if value is not None and not isinstance(value, int):
+            raise TypeError(&#34;Argument &#39;batch_multiplier&#39; must be None or an integer&#34;)
+        self._batch_multiplier = value
+
+    @property
+    def context(self):
+        &#34;&#34;&#34;Can be &#34;spawn&#34; or &#34;fork&#34; &#34;&#34;&#34;
+        return self._context
+
+    @context.setter
+    def context(self, value):
+        if value != &#34;spawn&#34; and value != &#34;fork&#34;:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;context&#39;. Can be &#39;spawn&#39; or &#39;fork&#39;&#34;)
+        self._context = value
+
+    @property
+    def print_percent(self):
+        &#34;&#34;&#34;Which processes should print when they are done&#34;&#34;&#34;
+        return self._print_percent
+
+    @print_percent.setter
+    def print_percent(self, value):
+        if value is None:
+            self._print_percent = value
+            return
+        if not isinstance(value, int):
+            raise TypeError(
+                f&#34;Invalid type &#39;{type(value)}&#39; for &#39;print_percent&#39;. Must be an integer between 1 and 100, or None.&#34;
+            )
+        if value &gt; 100 or value &lt; 1:
+            raise ValueError(
+                f&#34;Invalid value &#39;{value}&#39; for &#39;print_percent&#39;. Must be an integer between 1 and 100, or None&#34;
+            )
+        self._print_percent = value
+
+    @property
+    def verbose(self):
+        return self._verbose
+
+    @verbose.setter
+    def verbose(self, value):
+        if value is False:
+            self._prev_print_percent = self._print_percent
+            self._print_percent = None
+            self._verbose = False
+        elif value is True:
+            if self._print_percent is None:
+                self._print_percent = self._prev_print_percent
+            self._verbose = True
+        else:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;verbose&#39;. Must be True or False&#34;)
+
+    @property
+    def max_workers(self):
+        &#34;&#34;&#34;Max number of parallel processes that can run at the same time&#34;&#34;&#34;
+        return self._max_workers
+
+    @max_workers.setter
+    def max_workers(self, value):
+        if value is None:
+            self._max_workers = value
+            return
+        if not isinstance(value, int):
+            raise TypeError(
+                f&#34;Invalid type &#39;{type(value)}&#39; for &#39;max_workers&#39;. Must be an integer greater or equal to 1, or None.&#34;
+            )
+        if value &lt; 1:
+            value = None
+        self._max_workers = value
+
+    @property
+    def processes_or_workers(self):
+        &#34;&#34;&#34;If using Dask, whether processes or threds should be used&#34;&#34;&#34;
+        return self._processes_or_threads
+
+    @processes_or_workers.setter
+    def processes_or_workers(self, value):
+        if self.kind == &#34;multithread&#34;:
+            self._processes_or_threads = &#34;threads&#34;
+            return
+        if self.kind == &#34;multiproc&#34;:
+            self._processes_or_threads = &#34;processes&#34;
+            return
+        if value == &#34;process&#34;:
+            value = &#34;processes&#34;
+        elif value == &#34;thread&#34;:
+            value = &#34;threads&#34;
+        if value != &#34;processes&#34; and value != &#34;threads&#34;:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;process_or_worker&#39;. Can be &#39;processes&#39; or &#39;workers&#39;&#34;)
+        self._processes_or_threads = value
+
+    @property
+    def is_parallel(self) -&gt; bool:
+        &#34;&#34;&#34;True if `adparallelengine.adparallelengine.Engine.kind` is anything but &#39;serial&#39;&#34;&#34;&#34;
+        return self._kind != &#34;serial&#34;
+
+    # noinspection PyUnresolvedReferences
+    @property
+    def client(self) -&gt; Union[None, &#34;Client&#34;]:
+        &#34;&#34;&#34;Dask client, if using Dask or Dask-Kubernetes&#34;&#34;&#34;
+        return dask_client
+
+    def _treat_serial(self, iterable, method, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a serial run&#34;&#34;&#34;
+        if self.verbose is True:
+            logger.info(&#34;Computation is not parallel&#34;)
+        t = time()
+        results = [self._pre_launch(e, method, False, kwargs) for e in iterable]
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=False)
+        )
+
+    def _treat_dask(self, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a dask run&#34;&#34;&#34;
+        t = time()
+        results = [
+            self.client.submit(self._pre_launch, elem, method=method, batched=batched, kwargs=kwargs)
+            for elem in iterable
+        ]
+
+        return self._finish_job(
+            _Job(results=results, client=self.client, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _treat_mpi(self, max_workers, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a MPI run&#34;&#34;&#34;
+        if self.verbose is True:
+            logger.info(f&#34;Using at most {max_workers} mpi processes&#34;)
+        t = time()
+
+        # noinspection PyCallingNonCallable
+        with Engine.MPIPOOLEXECUTOR(max_workers=max_workers) as executor:
+            results = [executor.submit(self._pre_launch, elem, method, batched, kwargs) for elem in iterable]
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _treat_concurrent_or_threads(self, max_workers, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a multiprocess or multithread run&#34;&#34;&#34;
+        t = time()
+
+        if self._processes_or_threads == &#34;processes&#34;:
+            if self.verbose is True:
+                logger.info(f&#34;Using at most {max_workers} processes&#34;)
+            with ProcessPoolExecutor(max_workers=max_workers, mp_context=get_context(self._context)) as executor:
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
+        else:
+            # No max cpus in using threads
+            if self.verbose is True:
+                logger.info(f&#34;Using at most {len(iterable)} threads&#34;)
+            with ThreadPoolExecutor(max_workers=len(iterable)) as executor:
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _finish_job(self, job: _Job) -&gt; list:
+        &#34;&#34;&#34;Gathers the job results and some time and memory statistics&#34;&#34;&#34;
+        job.gather()
+        name = job.method_name
+        i = 1
+        while f&#34;{name}_times&#34; in self.times:
+            i += 1
+            name = f&#34;{job.method_name}_{i}&#34;
+        self.times[f&#34;{name}_times&#34;] = job.times
+        self.times[f&#34;{name}_total_time&#34;] = [job.runtime]
+        self.peak_mem_allocations[f&#34;{name}_mem&#34;] = job.peak_mem_allocations
+        return job.results
+
+    def _init_dask(self, max_workers):
+        &#34;&#34;&#34;Creates the Dask or KubeCluster Client&#34;&#34;&#34;
+        Engine.import_dask()
+        global dask_client
+        if self._kind == &#34;dask&#34;:
+            if self.__new:
+                if self._processes_or_threads == &#34;processes&#34;:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers, threads_per_worker=1)
+                else:
+                    dask_client = Engine.DASK_CLIENT(n_workers=1, threads_per_worker=max_workers)
+                if self.verbose is True:
+                    logger.info(
+                        f&#34;Using dask with {max_workers} {self._processes_or_threads}:&#34;
+                        f&#34; visit {self.client.dashboard_link} to monitor progression.&#34;
+                    )
+                self.__new = False
+
+            current_workers = len(self.client.scheduler_info()[&#34;workers&#34;])
+            if current_workers &lt; max_workers:
+                if self.verbose is True:
+                    logger.warning(
+                        f&#34;Current Dask client has {current_workers} workers, but {max_workers}&#34;
+                        &#34; can be used. Creating a new client.&#34;
+                    )
+                self.client.close()
+                if self._processes_or_threads == &#34;processes&#34;:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers, threads_per_worker=1)
+                else:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers)
+        else:
+            Engine.import_k8s()
+            if self.verbose is True:
+                logger.info(&#34;Using kubernetes cluster&#34;)
+            if self.__new:
+                self.docker_image = (
+                    f&#34;{os.environ[&#39;ADPARALLELENGINE_DOCKER_IMAGE&#39;]}:{os.environ[&#39;ADPARALLELENGINE_TAG&#39;]}&#34;
+                )
+                cluster = Engine.K8S_CLUSTER.from_dict(self.k8s_spec_dict)
+                cluster.adapt(minimum=1, maximum=int(os.getenv(&#34;ADPARALLELENGINE_DASK_KUBE_MAX_PODS&#34;, &#34;50&#34;)))
+                dask_client = Engine.DASK_CLIENT(cluster)
+                if self.verbose is True:
+                    logger.info(f&#34;Using dask kubernetes: visit {self.client.dashboard_link} to monitor progression.&#34;)
+                self.__new = False
+
+    def __call__(self, method: Callable, iterable: Iterable, length: Optional[int] = None, **kwargs) -&gt; list:
+        &#34;&#34;&#34;
+        kwargs reserved for the engine:
+        * batched (bool), to batch the items in &#39;collection&#39;. Uses
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
+        * gather (bool). If True, expects the method to return a collection, and flattens all the returned collections
+        into one.
+        * gather_method (Callable). If &#39;gather&#39; is True, use this method to gather the object intead of a basis list
+        comprehension
+        * share (dict). Dictionnary of pd.DataFrame, pd.Series or np.ndarray that should be written to disk and shared
+        by giving a path to the method.
+        * init_method (dict). Dictionnary of the form {&#34;method&#34;: a_method, &#34;kwargs&#34;: {...}}. The given method will be
+        executed in each process using given &#34;kwargs&#34;
+
+        All other kwargs will be passed to the method
+
+        Parameters
+        ----------
+        method: Callable
+            The method to run
+        iterable: Iterable
+            The iterable object containing the items to pass to the method. Can be a generator.
+        length: Optional[int]
+            Length if the collection. If not specified, the collection must define __len__ (i.e can not be a simple
+            iterator). If the collection is large and contains large object, it can speed up the process to give its
+            length explicitely here.
+        kwargs
+
+        Returns
+        -------
+        list
+            The list of all indiviudal returns of the given method
+        &#34;&#34;&#34;
+
+        # Make str for progress monitoring
+
+        iterable = CustomIterator(
+            iterable=iterable, length=length, method_name=method.__name__, print_percent=self._print_percent
+        )
+
+        if self.verbose is True:
+            logger.info(f&#34;Iterable has a length of {iterable.length}&#34;)
+
+        if length == 0:
+            if self.verbose is True:
+                logger.info(f&#34;Iterable is empty. Not calling method &#39;{method.__name__}&#39;.&#34;)
+            return []
+
+        # get &#39;batch&#39; argument
+
+        batched = False
+        if &#34;batched&#34; in kwargs:
+            batched = kwargs[&#34;batched&#34;]
+            del kwargs[&#34;batched&#34;]
+
+        gather = False
+        gather_method = None
+        if &#34;gather&#34; in kwargs:
+            gather = kwargs[&#34;gather&#34;]
+            del kwargs[&#34;gather&#34;]
+            if &#34;gather_method&#34; in kwargs:
+                gather_method = kwargs[&#34;gather_method&#34;]
+                del kwargs[&#34;gather_method&#34;]
+
+        # Get number of workers
+
+        kind = self._kind
+        max_workers = self._max_workers if self._max_workers is not None else 0
+        if max_workers &lt; 0:
+            max_workers = 0
+
+        if max_workers is not None and max_workers == 1:
+            kind = &#34;serial&#34;
+
+        if kind != &#34;mpi&#34; and self.is_parallel:
+            if max_workers != 0:
+                max_workers = min(max_workers, min(cpu_count(), max(iterable.length, 1)))
+            else:
+                max_workers = min(cpu_count(), max(iterable.length, 1))
+        elif kind == &#34;mpi&#34;:
+            # noinspection PyUnresolvedReferences
+            Engine.import_mpi()
+            if self.verbose is True:
+                logger.info(f&#34;MPI comm world size is {Engine.MPI.COMM_WORLD.size}&#34;)
+            if max_workers != 0:
+                min(max_workers, min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1)))
+            else:
+                max_workers = min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1))
+
+        # Dask must be initialised before _manage_shared, for self._client must not be None
+
+        if kind == &#34;dask&#34; or self.kind == &#34;kubernetes&#34;:
+            self._init_dask(max_workers)
+
+        # Manage shared kwargs
+
+        self._manage_shared(kwargs)
+
+        # Check if must and can be batched
+        if kind != &#34;serial&#34;:
+            iterable, batched = self._manage_batched_before(iterable, batched, max_workers)
+
+        # Launch computation depending on engine kind
+
+        if kind == &#34;serial&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_serial(iterable, method, kwargs)
+        elif kind == &#34;dask&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_dask(iterable, method, batched, kwargs)
+        elif kind == &#34;mpi&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_mpi(max_workers, iterable, method, batched, kwargs)
+        elif kind == &#34;concurrent&#34; or kind == &#34;multiproc&#34; or kind == &#34;multithread&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_concurrent_or_threads(max_workers, iterable, method, batched, kwargs)
+        else:
+            raise ValueError(f&#34;Unexpected kind {kind}&#34;)
+
+        if gather is True:
+            if gather_method is not None:
+                return gather_method(result)
+            else:
+                return [e for ee in result for e in ee]
+        return result
+
+    def _manage_shared(self, kwargs):
+        &#34;&#34;&#34;If &#39;shared&#39; was given in the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
+        it.
+
+        * If the engine is not parallel, just ignore the sharing process since it would be useless
+        * If using Dask or Dask-Kubernetes, puts each item in kwargs with for value the return of the &#39;scatter&#39; method
+        of the client
+        * Else, writes each item on disk in `adparallelengine.adparallelengine.Engine.path_shared` and replaces
+        kwargs[&#39;shared&#39;][item] by the path to the written data
+        &#34;&#34;&#34;
+        if not self.is_parallel:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+                    kwargs[item] = kwargs[&#34;share&#34;][item]
+                del kwargs[&#34;share&#34;]
+        else:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+
+                    if not isinstance(
+                        kwargs[&#34;share&#34;][item],
+                        (self.__class__.PANDAS.Series, self.__class__.PANDAS.DataFrame, np.ndarray),
+                    ):
+                        raise TypeError(
+                            &#34;Can only share pd.DataFrames, pd.Series or np.ndarray objects across processes&#34;
+                        )
+
+                    thetype = type(kwargs[&#34;share&#34;][item])
+                    if isinstance(kwargs[&#34;share&#34;][item], np.ndarray):
+                        kwargs[&#34;share&#34;][item] = self.__class__.PANDAS.DataFrame(kwargs[&#34;share&#34;][item])
+
+                    p = (self.path_shared / item).with_suffix(&#34;.parquet&#34;)
+                    if not p.isfile():
+                        p.write(kwargs[&#34;share&#34;][item])
+                    kwargs[&#34;share&#34;][item] = (p, thetype)
+
+    def _manage_batched_before(
+        self, iterable: CustomIterator, batched: Union[int, bool], workers: int
+    ) -&gt; Tuple[Iterable, bool]:
+        &#34;&#34;&#34;If &#39;batched&#39; was given to the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
+        it.
+
+        * If the engine is not parallel, just ignore the batching process since it is meaningless
+        * If &#39;batched&#39; is an integer and not a boolean, it is interpreted as the number of batches to use. This number
+        is adjusted with respect to the length of the collection, and
+        `adparallelengine.adparallelengine.Engine.batch_multiplier` is ignored.
+        * If &#39;batched&#39; is True, then the number of batches if the number of available workers times
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
+
+        Parameters
+        ----------
+        iterable: Collection
+        batched: Union[int, bool]
+        workers: int
+
+        Returns
+        -------
+        Tuple[Collection, bool]
+            (&#39;terable, False) unchanged if the number of batches ends up being 1, or if &#39;batched&#39; is False, else
+            returns (np.array_split(collection, nbatches), True)
+        &#34;&#34;&#34;
+        if workers is None:
+            return iterable, False
+        use_batch_multiplier = True
+        printed = False
+        if isinstance(batched, int) and not isinstance(batched, bool):
+            chunksize = min(iterable.length, abs(batched))
+            if chunksize &lt;= 0:
+                chunksize = 1
+            if chunksize == 1:
+                batched = False
+            else:
+                batched = True
+            nbatches = math.ceil(iterable.length / chunksize)
+            use_batch_multiplier = False
+            if self.verbose is True:
+                printed = True
+                logger.info(
+                    f&#34;Batching {iterable.length} objects into {nbatches}&#34;
+                    f&#34; batched of user-specified chunk size~{chunksize}&#34;
+                )
+        else:
+            nbatches = workers
+        if batched is True:
+            if iterable.length &lt;= nbatches or nbatches == 1:
+                return iterable, False
+            else:
+                if self._batch_multiplier is not None and use_batch_multiplier:
+                    nbatches = min(iterable.length, self._batch_multiplier * nbatches)
+                if self.verbose is True and printed is False:
+                    logger.info(f&#34;Batching {iterable.length} objects into {nbatches} batches&#34;)
+                with warnings.catch_warnings():
+                    warnings.simplefilter(&#34;ignore&#34;, category=np.VisibleDeprecationWarning)
+                    iterable = iterable.split(nbatches)
+                return iterable, True
+        return iterable, False
+
+    def _pre_launch(self, elements, method, batched, kwargs):
+        &#34;&#34;&#34;Method passed to the underlying engine (multiproc, dask, mpi...)
+
+        Parameters
+        ----------
+        elements: Collection
+            The collection of batches if dong batch run, or the original collection of elements
+        method: Callable
+        batched: bool
+        kwargs: dict
+            If &#39;share&#39; is present, will replace each kwargs[&#39;shared&#39;][item] by the read data.
+            If &#39;init_method&#39; in present, will call it and remove it from kwargs. Then **kwargs is passed to &#39;method&#39;.
+        &#34;&#34;&#34;
+        try:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+
+                    in_method = False
+                    in_init_method = False
+                    if item in dict(inspect.signature(method).parameters):
+                        in_method = True
+                    if &#34;init_method&#34; in kwargs:
+                        if &#34;method&#34; not in kwargs[&#34;init_method&#34;]:
+                            raise ValueError(&#34;If using kwarg &#39;init_method&#39; in Engine, must specify the &#39;method&#39; key&#34;)
+                        if item in dict(inspect.signature(kwargs[&#34;init_method&#34;][&#34;method&#34;]).parameters):
+                            in_init_method = True
+                    if not in_init_method and not in_method:
+                        raise ValueError(
+                            f&#34;Shared keyword argument {item} is not valid for the given method and init_method&#34;
+                        )
+
+                    item_loaded = kwargs[&#34;share&#34;][item][0].read()
+                    if kwargs[&#34;share&#34;][item][1] == self.__class__.PANDAS.Series:
+                        item_loaded = item_loaded.iloc[:, 0]
+                    elif kwargs[&#34;share&#34;][item][1] == np.ndarray:
+                        item_loaded = item_loaded.values
+                    if in_method:
+                        kwargs[item] = item_loaded
+                    if in_init_method:
+                        if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                            kwargs[&#34;init_method&#34;][&#34;kwargs&#34;][item] = item_loaded
+                        else:
+                            kwargs[&#34;init_method&#34;][&#34;kwargs&#34;] = {item: item_loaded}
+                del kwargs[&#34;share&#34;]
+
+            for item in kwargs:
+                if item == &#34;init_method&#34;:
+                    continue
+                in_method = False
+                in_init_method = False
+                if item in dict(inspect.signature(method).parameters):
+                    in_method = True
+                if &#34;init_method&#34; in kwargs:
+                    if &#34;method&#34; not in kwargs[&#34;init_method&#34;]:
+                        raise ValueError(&#34;If using kwarg &#39;init_method&#39; in Engine, must specify the &#39;method&#39; key&#34;)
+                    if item in dict(inspect.signature(kwargs[&#34;init_method&#34;][&#34;method&#34;]).parameters):
+                        in_init_method = True
+                if not in_init_method and not in_method:
+                    raise ValueError(f&#34;Keyword argument {item} is not valid for the given method and init_method&#34;)
+                if in_init_method:
+                    if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                        kwargs[&#34;init_method&#34;][&#34;kwargs&#34;][item] = kwargs[item]
+                    else:
+                        kwargs[&#34;init_method&#34;][&#34;kwargs&#34;] = {item: kwargs[item]}
+
+            if &#34;init_method&#34; in kwargs:
+                if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                    kwargs[&#34;init_method&#34;][&#34;method&#34;](**kwargs[&#34;init_method&#34;][&#34;kwargs&#34;])
+                else:
+                    kwargs[&#34;init_method&#34;][&#34;method&#34;]()
+                del kwargs[&#34;init_method&#34;]
+
+            if not batched:
+                return _launch(method, elements, kwargs)
+
+            to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements], dtype=&#34;object&#34;).T
+
+            return to_ret, times, mems
+        except Exception as e:
+            logger.critical(
+                f&#34;Process caught an error on element(s) {elements}&#34;
+                f&#34; : {&#39;&#39;.join(tb.format_exception(None, e, e.__traceback__))}&#34;
+            )
+            raise e
+
+
+def _launch(method, element, kwargs):
+    &#34;&#34;&#34;Where the method is actually called on an element of the original collection&#34;&#34;&#34;
+    element, toprint = element
+    t = time()
+    if Engine.TRACEMALLOC is True:
+        if tracemalloc.is_tracing():
+            try:
+                tracemalloc.reset_peak()
+            except AttributeError:  # Before python3.9, tracemalloc had no &#34;reset_peak&#34; method
+                tracemalloc.stop()
+                tracemalloc.start()
+        else:
+            tracemalloc.start()
+    to_ret = method(element, **kwargs)
+    if toprint is not None:
+        logger.info(toprint)
+    if Engine.TRACEMALLOC is True:
+        mem = tracemalloc.get_traced_memory()[1]
+        tracemalloc.stop()
+    else:
+        mem = math.nan
+    return to_ret, time() - t, mem</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="adparallelengine.adparallelengine.dask_client"><code class="name">var <span class="ident">dask_client</span></code></dt>
+<dd>
+<div class="desc"><p>Dask client must be global. Only used if using Dask or Dask-Kubernetes</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="adparallelengine.adparallelengine.to_bool"><code class="name flex">
+<span>def <span class="ident">to_bool</span></span>(<span>s: str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_bool(s: str):
+    s = s.replace(&#34; &#34;, &#34;&#34;).split(&#34;#&#34;)[0]
+    if s.lower() == &#34;false&#34; or s == &#34;&#34;:
+        return False
+    if s.lower() == &#34;true&#34;:
+        return True
+    raise ValueError(f&#34;Can not convert string {s} to bool&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="adparallelengine.adparallelengine.CustomIterator"><code class="flex name class">
+<span>class <span class="ident">CustomIterator</span></span>
+<span>(</span><span>iterable: Iterable, method_name: str = 'method', print_percent: Optional[None] = 10, length: Optional[None] = None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CustomIterator:
+    def __init__(
+        self,
+        iterable: Iterable,
+        method_name: str = &#34;method&#34;,
+        print_percent: Union[None, int] = 10,
+        length: Optional[int] = None,
+    ):
+        self.iterable = iterable
+        if length is None:
+            if not hasattr(iterable, &#34;__len__&#34;):
+                raise TypeError(
+                    &#34;If the length of the iterable is not specified, it must implement the &#39;__len__&#39; method&#34;
+                )
+            # noinspection PyTypeChecker
+            self.length = len(iterable)
+        else:
+            self.length = length
+
+        if print_percent is not None:
+            dt = int(self.length / print_percent)
+            if self.length &lt; print_percent:
+                dt = 1
+            self.indexes_to_print = {
+                i: f&#34;{method_name} : {i}/{self.length}, {round(100 * i / self.length, 2)}%&#34;
+                for i in list(range(dt, self.length + 1, dt))
+            }
+        else:
+            self.indexes_to_print = {}
+
+    def __len__(self):
+        return self.length
+
+    def __iter__(self):
+        for i, elem in enumerate(self.iterable):
+            if i + 1 in self.indexes_to_print:
+                yield elem, self.indexes_to_print[i + 1]
+            else:
+                yield elem, None
+
+    def split(self, nbatches: int):
+        batch_size = self.length // nbatches
+        iterator = iter(self)
+        for first in iterator:
+
+            def chunk():
+                yield first
+                for more in islice(iterator, batch_size - 1):
+                    yield more
+
+            yield [e for e in chunk()]</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="adparallelengine.adparallelengine.CustomIterator.split"><code class="name flex">
+<span>def <span class="ident">split</span></span>(<span>self, nbatches: int)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split(self, nbatches: int):
+    batch_size = self.length // nbatches
+    iterator = iter(self)
+    for first in iterator:
+
+        def chunk():
+            yield first
+            for more in islice(iterator, batch_size - 1):
+                yield more
+
+        yield [e for e in chunk()]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine"><code class="flex name class">
+<span>class <span class="ident">Engine</span></span>
+<span>(</span><span>kind: str, batch_multiplier: Optional[None] = None, docker_image: Optional[str] = None, context: str = 'spawn', processes_or_threads: str = 'processes', print_percent: int = 10, max_workers: Optional[None] = None, path_shared: Optional[ForwardRef('TransparentPath')] = None, k8s_spec_dict: Optional[dict] = None, verbose: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wrapper around several ways of doing parallel runs in Python</p>
+<p>Can be a 'serial' engine, which does not do parallel runs, can use concurrent.futures with processes or threads,
+can use Dask, Dask-Kubernetes and MPI.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>kind</code></strong> :&ensp;<code>str</code></dt>
+<dd>Can be any of "serial", "mpi", "dask", "multiproc", "concurrent", "kubernetes", "multithread".
+"concurrent" and "multiproc" are synonymes.</dd>
+<dt><strong><code>batch_multiplier</code></strong> :&ensp;<code>Optional[int]</code></dt>
+<dd>Number of items to pass to each process if doing batched multiprocessing</dd>
+<dt><strong><code>docker_image</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>If using Dask-Kubernetes, docker image of the main program</dd>
+<dt><strong><code>context</code></strong> :&ensp;<code>str</code></dt>
+<dd>Multiprocessing context. Can be "spawn" (default) or "fork", use "spawn" if your paralleled processes use
+numpy.</dd>
+<dt><strong><code>processes_or_threads</code></strong> :&ensp;<code>str</code></dt>
+<dd>Can be "processes" (default) or "threads". Only relevent if <code><a title="adparallelengine.adparallelengine.Engine.kind" href="#adparallelengine.adparallelengine.Engine.kind">Engine.kind</a></code>
+is 'Dask'.</dd>
+<dt><strong><code>print_percent</code></strong> :&ensp;<code>int</code></dt>
+<dd>If 'verbose' is True, processes matching 'print_percent' percent will say it when they finished. If None,
+processes do not say anything (Default value = 10).</dd>
+<dt><strong><code>max_workers</code></strong> :&ensp;<code>Optional[int]</code></dt>
+<dd>To limit the number of CPUs to use. If &lt; 1, uses os.cpu_count().</dd>
+<dt><strong><code>path_shared</code></strong> :&ensp;<code>Optional["TransparentPath"]</code></dt>
+<dd>To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+processes read them by sharing a path instead of the heavy object itself. 'path_shared' tells the engine
+where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparallelengine_temp".</dd>
+<dt><strong><code>k8s_spec_dict</code></strong> :&ensp;<code>Optional[dict]</code></dt>
+<dd>If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.</dd>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>times</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Dictionnary of 'method_name': [run times]</dd>
+<dt><strong><code>peak_mem_allocations</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Dictionnary of 'method_name': [Max memory usage]</dd>
+</dl>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kind</code></strong> :&ensp;<code>str</code></dt>
+<dd>Can be any of "serial", "mpi", "dask", "multiproc", "concurrent", "kubernetes", "multithread".
+"concurrent" and "multiproc" are synonymes.</dd>
+<dt><strong><code>batch_multiplier</code></strong> :&ensp;<code>Optional[int]</code></dt>
+<dd>Number of items to pass to each process if doing batched multiprocessing</dd>
+<dt><strong><code>docker_image</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>If using Dask-Kubernetes, docker image of the main program</dd>
+<dt><strong><code>context</code></strong> :&ensp;<code>str</code></dt>
+<dd>Multiprocessing context. Can be "spawn" (default) or "fork", use "spawn" if your paralleled processes use
+numpy.</dd>
+<dt><strong><code>processes_or_threads</code></strong> :&ensp;<code>str</code></dt>
+<dd>Can be "processes" (default) or "threads". Only relevent if <code><a title="adparallelengine.adparallelengine.Engine.kind" href="#adparallelengine.adparallelengine.Engine.kind">Engine.kind</a></code>
+is 'Dask'.</dd>
+<dt><strong><code>print_percent</code></strong> :&ensp;<code>int</code></dt>
+<dd>If 'verbose' is True, processes matching 'print_percent' percent will say it when they finished. If None,
+processes do not say anything (Default value = 10).</dd>
+<dt><strong><code>max_workers</code></strong> :&ensp;<code>Optional[int]</code></dt>
+<dd>To limit the number of CPUs to use. If &lt; 1 or None, uses os.cpu_count().</dd>
+<dt><strong><code>path_shared</code></strong> :&ensp;<code>Optional["TransparentPath"]</code></dt>
+<dd>To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+processes read them by sharing a path instead of the heavy object itself. 'path_shared' tells the engine
+where those shared objects should be written. Defaults to "tempfile.gettempdir() / adparallelengine_temp".</dd>
+<dt><strong><code>k8s_spec_dict</code></strong> :&ensp;<code>Optional[dict]</code></dt>
+<dd>If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.</dd>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Engine:
+    &#34;&#34;&#34;Wrapper around several ways of doing parallel runs in Python
+
+    Can be a &#39;serial&#39; engine, which does not do parallel runs, can use concurrent.futures with processes or threads,
+    can use Dask, Dask-Kubernetes and MPI.
+
+    Attributes
+    ----------
+    kind: str
+        Can be any of &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;.
+        &#34;concurrent&#34; and &#34;multiproc&#34; are synonymes.
+    batch_multiplier: Optional[int]
+         Number of items to pass to each process if doing batched multiprocessing
+    docker_image: Optional[str]
+        If using Dask-Kubernetes, docker image of the main program
+    context: str
+        Multiprocessing context. Can be &#34;spawn&#34; (default) or &#34;fork&#34;, use &#34;spawn&#34; if your paralleled processes use
+        numpy.
+    processes_or_threads: str
+        Can be &#34;processes&#34; (default) or &#34;threads&#34;. Only relevent if `adparallelengine.adparallelengine.Engine.kind`
+        is &#39;Dask&#39;.
+    print_percent: int
+        If &#39;verbose&#39; is True, processes matching &#39;print_percent&#39; percent will say it when they finished. If None,
+        processes do not say anything (Default value = 10).
+    max_workers: Optional[int]
+        To limit the number of CPUs to use. If &lt; 1, uses os.cpu_count().
+    path_shared: Optional[&#34;TransparentPath&#34;]
+        To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+        processes read them by sharing a path instead of the heavy object itself. &#39;path_shared&#39; tells the engine
+        where those shared objects should be written. Defaults to &#34;tempfile.gettempdir() / adparallelengine_temp&#34;.
+    k8s_spec_dict: Optional[dict]
+        If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
+    verbose: bool
+    times: dict
+        Dictionnary of &#39;method_name&#39;: [run times]
+    peak_mem_allocations: dict
+        Dictionnary of &#39;method_name&#39;: [Max memory usage]
+    &#34;&#34;&#34;
+
+    kinds = [&#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;]
+    _MPI, _MPIPOOLEXECUTOR = None, None
+    _DASK_CLIENT = None
+    _K8S_CLUSTER = None
+    _PANDAS = None
+    _PATH = None
+    TRACEMALLOC = True
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def MPI(cls):
+        if cls._MPI is None:
+            cls.import_mpi()
+        return cls._MPI
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def MPIPOOLEXECUTOR(cls):
+        if cls._MPIPOOLEXECUTOR is None:
+            cls.import_mpi()
+        return cls._MPIPOOLEXECUTOR
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def PANDAS(cls):
+        if cls._PANDAS is None:
+            cls.import_pandas()
+        return cls._PANDAS
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def PATH(cls):
+        if cls._PATH is None:
+            cls.import_transparentpath()
+        return cls._PATH
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def DASK_CLIENT(cls):
+        if cls._DASK_CLIENT is None:
+            cls.import_dask()
+        return cls._DASK_CLIENT
+
+    # noinspection PyMethodParameters
+    @classproperty
+    def K8S_CLUSTER(cls):
+        if cls._K8S_CLUSTER is None:
+            cls.import_k8s()
+        return cls._K8S_CLUSTER
+
+    @classmethod
+    def import_mpi(cls):
+        try:
+            import mpi4py.rc
+
+            mpi4py.rc.threads = False
+            from mpi4py import MPI
+            from mpi4py.futures import MPIPoolExecutor
+
+            cls._MPI, cls._MPIPOOLEXECUTOR = MPI, MPIPoolExecutor
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import mpi4py. You can do it by running `pip install adparallelengine[mpi]`.&#34;
+                &#34; Make sure also that MPI is installed on your computer (OpenMPI should work)\n\n&#34;
+                f&#34;Original error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_pandas(cls):
+        try:
+            import pandas as pd
+
+            cls._PANDAS = pd
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import pandas. You can do it by running&#34;
+                f&#34; `pip install adparallelengine[support_shared]`.\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_transparentpath(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from transparentpath import Path
+
+            cls._PATH = Path
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import transparentpath. You can do it by running&#34;
+                f&#34;`pip install adparallelengine[support_shared]` .\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_dask(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from dask.distributed import Client
+
+            cls._DASK_CLIENT = Client
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can&#39;t import dask. You can do it by running `pip install adparallelengine[dask]`.&#34;
+                f&#34;\n\nOriginal error was {str(e)}&#34;
+            )
+
+    @classmethod
+    def import_k8s(cls):
+        try:
+            # noinspection PyUnresolvedReferences
+            from dask_kubernetes import KubeCluster
+
+            cls._K8S_CLUSTER = KubeCluster
+        except ImportError as e:
+            raise ImportError(
+                &#34;AdparallelEngine can not import dask_kubernetes. You can do it by running&#34;
+                f&#34; `pip install adparallelengine[k8s]`.\n\nOriginal error was {str(e)}&#34;
+            )
+
+    # noinspection PyUnresolvedReferences
+    def __init__(
+        self,
+        kind: str,
+        batch_multiplier: Optional[int] = None,
+        docker_image: Optional[str] = None,
+        context: str = &#34;spawn&#34;,
+        processes_or_threads: str = &#34;processes&#34;,
+        print_percent: int = 10,
+        max_workers: Optional[int] = None,
+        path_shared: Optional[&#34;TransparentPath&#34;] = None,
+        k8s_spec_dict: Optional[dict] = None,
+        verbose: bool = True,
+    ):
+        &#34;&#34;&#34;
+
+        Parameters
+        ----------
+        kind: str
+            Can be any of &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34;.
+            &#34;concurrent&#34; and &#34;multiproc&#34; are synonymes.
+        batch_multiplier: Optional[int]
+             Number of items to pass to each process if doing batched multiprocessing
+        docker_image: Optional[str]
+            If using Dask-Kubernetes, docker image of the main program
+        context: str
+            Multiprocessing context. Can be &#34;spawn&#34; (default) or &#34;fork&#34;, use &#34;spawn&#34; if your paralleled processes use
+            numpy.
+        processes_or_threads: str
+            Can be &#34;processes&#34; (default) or &#34;threads&#34;. Only relevent if `adparallelengine.adparallelengine.Engine.kind`
+            is &#39;Dask&#39;.
+        print_percent: int
+            If &#39;verbose&#39; is True, processes matching &#39;print_percent&#39; percent will say it when they finished. If None,
+            processes do not say anything (Default value = 10).
+        max_workers: Optional[int]
+            To limit the number of CPUs to use. If &lt; 1 or None, uses os.cpu_count().
+        path_shared: Optional[&#34;TransparentPath&#34;]
+            To save memory, one can decide to write heavy pd.Dataframe, pd.Series or np.ndarray to disk and make
+            processes read them by sharing a path instead of the heavy object itself. &#39;path_shared&#39; tells the engine
+            where those shared objects should be written. Defaults to &#34;tempfile.gettempdir() / adparallelengine_temp&#34;.
+        k8s_spec_dict: Optional[dict]
+            If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.
+        verbose: bool
+        &#34;&#34;&#34;
+        self._kind = None
+        self._batch_multiplier = None
+        self.docker_image = docker_image
+        &#34;&#34;&#34;If using Dask-Kubernetes, docker image of the main program&#34;&#34;&#34;
+        self._context = None
+        self._processes_or_threads = None
+        self._print_percent = None
+        self._max_workers = None
+        self._path_shared = None
+
+        self.kind = kind
+        self.batch_multiplier = batch_multiplier
+        self.context = context
+        self.processes_or_workers = processes_or_threads
+        self.print_percent = print_percent if verbose is True else None
+        self.max_workers = max_workers
+        self.path_shared = path_shared
+        self._prev_print_percent = self.print_percent
+        self._verbose = verbose
+
+        self.__new = True
+        self.times = {}
+        &#34;&#34;&#34;Dictionnary of run times of the various methods that have been ran through this engine&#34;&#34;&#34;
+        self.peak_mem_allocations = {}
+        &#34;&#34;&#34;Dictionnary of maximum memory usage of the various methods that have been ran through this engine&#34;&#34;&#34;
+
+        self.path_shared = None
+        &#34;&#34;&#34;Where the shared objects should be written&#34;&#34;&#34;
+        if path_shared is not None:
+            self.path_shared = path_shared
+
+        self.k8s_spec_dict = k8s_spec_dict
+        &#34;&#34;&#34;If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.&#34;&#34;&#34;
+
+    def clean_shared(self):
+        &#34;&#34;&#34;Removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+        if self.path_shared is not None:
+            self.path_shared.rm(absent=&#34;ignore&#34;, ignore_kind=True)
+
+    def close(self):
+        &#34;&#34;&#34;If using Dask or Dask-Kubernetes, closes the client. Also, removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+        if self.client is not None:
+            self.client.close()
+
+        self.clean_shared()
+
+    @property
+    def path_shared(self):
+        return self._path_shared
+
+    @path_shared.setter
+    def path_shared(self, path_shared):
+        if self.kind == &#34;serial&#34;:
+            self._path_shared = None
+            return
+        if path_shared is None:
+            path_shared = self.__class__.PATH(gettempdir(), fs=&#34;local&#34;) / &#34;adparallelengine_temp&#34;
+        if str(path_shared) == str(self.__class__.PATH(gettempdir(), fs=&#34;local&#34;)):
+            path_shared = self.__class__.PATH(gettempdir(), fs=&#34;local&#34;) / &#34;adparallelengine_temp&#34;
+            logger.warning(
+                &#34;Can not use default tempdir as shared directory for adparellelengine, since it would be deleted after&#34;
+                f&#34; the run. Using {path_shared} instead.&#34;
+            )
+        if not path_shared.isdir():
+            path_shared.mkdir()
+        self._path_shared = path_shared
+
+    @property
+    def kind(self):
+        &#34;&#34;&#34;Can be &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34; &#34;&#34;&#34;
+        return self._kind
+
+    @kind.setter
+    def kind(self, value):
+        if value not in Engine.kinds:
+            raise ValueError(f&#34;Unknown engine kind {value}&#34;)
+        self._kind = value
+
+    @property
+    def batch_multiplier(self):
+        &#34;&#34;&#34;Number of items to pass to each process if doing batched multiprocessing&#34;&#34;&#34;
+        return self._kind
+
+    @batch_multiplier.setter
+    def batch_multiplier(self, value):
+        if value is not None and not isinstance(value, int):
+            raise TypeError(&#34;Argument &#39;batch_multiplier&#39; must be None or an integer&#34;)
+        self._batch_multiplier = value
+
+    @property
+    def context(self):
+        &#34;&#34;&#34;Can be &#34;spawn&#34; or &#34;fork&#34; &#34;&#34;&#34;
+        return self._context
+
+    @context.setter
+    def context(self, value):
+        if value != &#34;spawn&#34; and value != &#34;fork&#34;:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;context&#39;. Can be &#39;spawn&#39; or &#39;fork&#39;&#34;)
+        self._context = value
+
+    @property
+    def print_percent(self):
+        &#34;&#34;&#34;Which processes should print when they are done&#34;&#34;&#34;
+        return self._print_percent
+
+    @print_percent.setter
+    def print_percent(self, value):
+        if value is None:
+            self._print_percent = value
+            return
+        if not isinstance(value, int):
+            raise TypeError(
+                f&#34;Invalid type &#39;{type(value)}&#39; for &#39;print_percent&#39;. Must be an integer between 1 and 100, or None.&#34;
+            )
+        if value &gt; 100 or value &lt; 1:
+            raise ValueError(
+                f&#34;Invalid value &#39;{value}&#39; for &#39;print_percent&#39;. Must be an integer between 1 and 100, or None&#34;
+            )
+        self._print_percent = value
+
+    @property
+    def verbose(self):
+        return self._verbose
+
+    @verbose.setter
+    def verbose(self, value):
+        if value is False:
+            self._prev_print_percent = self._print_percent
+            self._print_percent = None
+            self._verbose = False
+        elif value is True:
+            if self._print_percent is None:
+                self._print_percent = self._prev_print_percent
+            self._verbose = True
+        else:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;verbose&#39;. Must be True or False&#34;)
+
+    @property
+    def max_workers(self):
+        &#34;&#34;&#34;Max number of parallel processes that can run at the same time&#34;&#34;&#34;
+        return self._max_workers
+
+    @max_workers.setter
+    def max_workers(self, value):
+        if value is None:
+            self._max_workers = value
+            return
+        if not isinstance(value, int):
+            raise TypeError(
+                f&#34;Invalid type &#39;{type(value)}&#39; for &#39;max_workers&#39;. Must be an integer greater or equal to 1, or None.&#34;
+            )
+        if value &lt; 1:
+            value = None
+        self._max_workers = value
+
+    @property
+    def processes_or_workers(self):
+        &#34;&#34;&#34;If using Dask, whether processes or threds should be used&#34;&#34;&#34;
+        return self._processes_or_threads
+
+    @processes_or_workers.setter
+    def processes_or_workers(self, value):
+        if self.kind == &#34;multithread&#34;:
+            self._processes_or_threads = &#34;threads&#34;
+            return
+        if self.kind == &#34;multiproc&#34;:
+            self._processes_or_threads = &#34;processes&#34;
+            return
+        if value == &#34;process&#34;:
+            value = &#34;processes&#34;
+        elif value == &#34;thread&#34;:
+            value = &#34;threads&#34;
+        if value != &#34;processes&#34; and value != &#34;threads&#34;:
+            raise ValueError(f&#34;Invalid value &#39;{value}&#39; for &#39;process_or_worker&#39;. Can be &#39;processes&#39; or &#39;workers&#39;&#34;)
+        self._processes_or_threads = value
+
+    @property
+    def is_parallel(self) -&gt; bool:
+        &#34;&#34;&#34;True if `adparallelengine.adparallelengine.Engine.kind` is anything but &#39;serial&#39;&#34;&#34;&#34;
+        return self._kind != &#34;serial&#34;
+
+    # noinspection PyUnresolvedReferences
+    @property
+    def client(self) -&gt; Union[None, &#34;Client&#34;]:
+        &#34;&#34;&#34;Dask client, if using Dask or Dask-Kubernetes&#34;&#34;&#34;
+        return dask_client
+
+    def _treat_serial(self, iterable, method, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a serial run&#34;&#34;&#34;
+        if self.verbose is True:
+            logger.info(&#34;Computation is not parallel&#34;)
+        t = time()
+        results = [self._pre_launch(e, method, False, kwargs) for e in iterable]
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=False)
+        )
+
+    def _treat_dask(self, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a dask run&#34;&#34;&#34;
+        t = time()
+        results = [
+            self.client.submit(self._pre_launch, elem, method=method, batched=batched, kwargs=kwargs)
+            for elem in iterable
+        ]
+
+        return self._finish_job(
+            _Job(results=results, client=self.client, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _treat_mpi(self, max_workers, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a MPI run&#34;&#34;&#34;
+        if self.verbose is True:
+            logger.info(f&#34;Using at most {max_workers} mpi processes&#34;)
+        t = time()
+
+        # noinspection PyCallingNonCallable
+        with Engine.MPIPOOLEXECUTOR(max_workers=max_workers) as executor:
+            results = [executor.submit(self._pre_launch, elem, method, batched, kwargs) for elem in iterable]
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _treat_concurrent_or_threads(self, max_workers, iterable, method, batched, kwargs) -&gt; list:
+        &#34;&#34;&#34;Launches the method in a multiprocess or multithread run&#34;&#34;&#34;
+        t = time()
+
+        if self._processes_or_threads == &#34;processes&#34;:
+            if self.verbose is True:
+                logger.info(f&#34;Using at most {max_workers} processes&#34;)
+            with ProcessPoolExecutor(max_workers=max_workers, mp_context=get_context(self._context)) as executor:
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
+        else:
+            # No max cpus in using threads
+            if self.verbose is True:
+                logger.info(f&#34;Using at most {len(iterable)} threads&#34;)
+            with ThreadPoolExecutor(max_workers=len(iterable)) as executor:
+                results = []
+                for elem in iterable:
+                    results.append(executor.submit(self._pre_launch, elem, method, batched, kwargs))
+
+        return self._finish_job(
+            _Job(results=results, client=None, method_name=method.__name__, starttime=t, batched=batched)
+        )
+
+    def _finish_job(self, job: _Job) -&gt; list:
+        &#34;&#34;&#34;Gathers the job results and some time and memory statistics&#34;&#34;&#34;
+        job.gather()
+        name = job.method_name
+        i = 1
+        while f&#34;{name}_times&#34; in self.times:
+            i += 1
+            name = f&#34;{job.method_name}_{i}&#34;
+        self.times[f&#34;{name}_times&#34;] = job.times
+        self.times[f&#34;{name}_total_time&#34;] = [job.runtime]
+        self.peak_mem_allocations[f&#34;{name}_mem&#34;] = job.peak_mem_allocations
+        return job.results
+
+    def _init_dask(self, max_workers):
+        &#34;&#34;&#34;Creates the Dask or KubeCluster Client&#34;&#34;&#34;
+        Engine.import_dask()
+        global dask_client
+        if self._kind == &#34;dask&#34;:
+            if self.__new:
+                if self._processes_or_threads == &#34;processes&#34;:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers, threads_per_worker=1)
+                else:
+                    dask_client = Engine.DASK_CLIENT(n_workers=1, threads_per_worker=max_workers)
+                if self.verbose is True:
+                    logger.info(
+                        f&#34;Using dask with {max_workers} {self._processes_or_threads}:&#34;
+                        f&#34; visit {self.client.dashboard_link} to monitor progression.&#34;
+                    )
+                self.__new = False
+
+            current_workers = len(self.client.scheduler_info()[&#34;workers&#34;])
+            if current_workers &lt; max_workers:
+                if self.verbose is True:
+                    logger.warning(
+                        f&#34;Current Dask client has {current_workers} workers, but {max_workers}&#34;
+                        &#34; can be used. Creating a new client.&#34;
+                    )
+                self.client.close()
+                if self._processes_or_threads == &#34;processes&#34;:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers, threads_per_worker=1)
+                else:
+                    dask_client = Engine.DASK_CLIENT(n_workers=max_workers)
+        else:
+            Engine.import_k8s()
+            if self.verbose is True:
+                logger.info(&#34;Using kubernetes cluster&#34;)
+            if self.__new:
+                self.docker_image = (
+                    f&#34;{os.environ[&#39;ADPARALLELENGINE_DOCKER_IMAGE&#39;]}:{os.environ[&#39;ADPARALLELENGINE_TAG&#39;]}&#34;
+                )
+                cluster = Engine.K8S_CLUSTER.from_dict(self.k8s_spec_dict)
+                cluster.adapt(minimum=1, maximum=int(os.getenv(&#34;ADPARALLELENGINE_DASK_KUBE_MAX_PODS&#34;, &#34;50&#34;)))
+                dask_client = Engine.DASK_CLIENT(cluster)
+                if self.verbose is True:
+                    logger.info(f&#34;Using dask kubernetes: visit {self.client.dashboard_link} to monitor progression.&#34;)
+                self.__new = False
+
+    def __call__(self, method: Callable, iterable: Iterable, length: Optional[int] = None, **kwargs) -&gt; list:
+        &#34;&#34;&#34;
+        kwargs reserved for the engine:
+        * batched (bool), to batch the items in &#39;collection&#39;. Uses
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
+        * gather (bool). If True, expects the method to return a collection, and flattens all the returned collections
+        into one.
+        * gather_method (Callable). If &#39;gather&#39; is True, use this method to gather the object intead of a basis list
+        comprehension
+        * share (dict). Dictionnary of pd.DataFrame, pd.Series or np.ndarray that should be written to disk and shared
+        by giving a path to the method.
+        * init_method (dict). Dictionnary of the form {&#34;method&#34;: a_method, &#34;kwargs&#34;: {...}}. The given method will be
+        executed in each process using given &#34;kwargs&#34;
+
+        All other kwargs will be passed to the method
+
+        Parameters
+        ----------
+        method: Callable
+            The method to run
+        iterable: Iterable
+            The iterable object containing the items to pass to the method. Can be a generator.
+        length: Optional[int]
+            Length if the collection. If not specified, the collection must define __len__ (i.e can not be a simple
+            iterator). If the collection is large and contains large object, it can speed up the process to give its
+            length explicitely here.
+        kwargs
+
+        Returns
+        -------
+        list
+            The list of all indiviudal returns of the given method
+        &#34;&#34;&#34;
+
+        # Make str for progress monitoring
+
+        iterable = CustomIterator(
+            iterable=iterable, length=length, method_name=method.__name__, print_percent=self._print_percent
+        )
+
+        if self.verbose is True:
+            logger.info(f&#34;Iterable has a length of {iterable.length}&#34;)
+
+        if length == 0:
+            if self.verbose is True:
+                logger.info(f&#34;Iterable is empty. Not calling method &#39;{method.__name__}&#39;.&#34;)
+            return []
+
+        # get &#39;batch&#39; argument
+
+        batched = False
+        if &#34;batched&#34; in kwargs:
+            batched = kwargs[&#34;batched&#34;]
+            del kwargs[&#34;batched&#34;]
+
+        gather = False
+        gather_method = None
+        if &#34;gather&#34; in kwargs:
+            gather = kwargs[&#34;gather&#34;]
+            del kwargs[&#34;gather&#34;]
+            if &#34;gather_method&#34; in kwargs:
+                gather_method = kwargs[&#34;gather_method&#34;]
+                del kwargs[&#34;gather_method&#34;]
+
+        # Get number of workers
+
+        kind = self._kind
+        max_workers = self._max_workers if self._max_workers is not None else 0
+        if max_workers &lt; 0:
+            max_workers = 0
+
+        if max_workers is not None and max_workers == 1:
+            kind = &#34;serial&#34;
+
+        if kind != &#34;mpi&#34; and self.is_parallel:
+            if max_workers != 0:
+                max_workers = min(max_workers, min(cpu_count(), max(iterable.length, 1)))
+            else:
+                max_workers = min(cpu_count(), max(iterable.length, 1))
+        elif kind == &#34;mpi&#34;:
+            # noinspection PyUnresolvedReferences
+            Engine.import_mpi()
+            if self.verbose is True:
+                logger.info(f&#34;MPI comm world size is {Engine.MPI.COMM_WORLD.size}&#34;)
+            if max_workers != 0:
+                min(max_workers, min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1)))
+            else:
+                max_workers = min(Engine.MPI.COMM_WORLD.size, max(iterable.length, 1))
+
+        # Dask must be initialised before _manage_shared, for self._client must not be None
+
+        if kind == &#34;dask&#34; or self.kind == &#34;kubernetes&#34;:
+            self._init_dask(max_workers)
+
+        # Manage shared kwargs
+
+        self._manage_shared(kwargs)
+
+        # Check if must and can be batched
+        if kind != &#34;serial&#34;:
+            iterable, batched = self._manage_batched_before(iterable, batched, max_workers)
+
+        # Launch computation depending on engine kind
+
+        if kind == &#34;serial&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_serial(iterable, method, kwargs)
+        elif kind == &#34;dask&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_dask(iterable, method, batched, kwargs)
+        elif kind == &#34;mpi&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_mpi(max_workers, iterable, method, batched, kwargs)
+        elif kind == &#34;concurrent&#34; or kind == &#34;multiproc&#34; or kind == &#34;multithread&#34;:
+            # noinspection PyTypeChecker
+            result = self._treat_concurrent_or_threads(max_workers, iterable, method, batched, kwargs)
+        else:
+            raise ValueError(f&#34;Unexpected kind {kind}&#34;)
+
+        if gather is True:
+            if gather_method is not None:
+                return gather_method(result)
+            else:
+                return [e for ee in result for e in ee]
+        return result
+
+    def _manage_shared(self, kwargs):
+        &#34;&#34;&#34;If &#39;shared&#39; was given in the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
+        it.
+
+        * If the engine is not parallel, just ignore the sharing process since it would be useless
+        * If using Dask or Dask-Kubernetes, puts each item in kwargs with for value the return of the &#39;scatter&#39; method
+        of the client
+        * Else, writes each item on disk in `adparallelengine.adparallelengine.Engine.path_shared` and replaces
+        kwargs[&#39;shared&#39;][item] by the path to the written data
+        &#34;&#34;&#34;
+        if not self.is_parallel:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+                    kwargs[item] = kwargs[&#34;share&#34;][item]
+                del kwargs[&#34;share&#34;]
+        else:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+
+                    if not isinstance(
+                        kwargs[&#34;share&#34;][item],
+                        (self.__class__.PANDAS.Series, self.__class__.PANDAS.DataFrame, np.ndarray),
+                    ):
+                        raise TypeError(
+                            &#34;Can only share pd.DataFrames, pd.Series or np.ndarray objects across processes&#34;
+                        )
+
+                    thetype = type(kwargs[&#34;share&#34;][item])
+                    if isinstance(kwargs[&#34;share&#34;][item], np.ndarray):
+                        kwargs[&#34;share&#34;][item] = self.__class__.PANDAS.DataFrame(kwargs[&#34;share&#34;][item])
+
+                    p = (self.path_shared / item).with_suffix(&#34;.parquet&#34;)
+                    if not p.isfile():
+                        p.write(kwargs[&#34;share&#34;][item])
+                    kwargs[&#34;share&#34;][item] = (p, thetype)
+
+    def _manage_batched_before(
+        self, iterable: CustomIterator, batched: Union[int, bool], workers: int
+    ) -&gt; Tuple[Iterable, bool]:
+        &#34;&#34;&#34;If &#39;batched&#39; was given to the kwargs when using `adparallelengine.adparallelengine.Engine.__call__`, manages
+        it.
+
+        * If the engine is not parallel, just ignore the batching process since it is meaningless
+        * If &#39;batched&#39; is an integer and not a boolean, it is interpreted as the number of batches to use. This number
+        is adjusted with respect to the length of the collection, and
+        `adparallelengine.adparallelengine.Engine.batch_multiplier` is ignored.
+        * If &#39;batched&#39; is True, then the number of batches if the number of available workers times
+        `adparallelengine.adparallelengine.Engine.batch_multiplier`.
+
+        Parameters
+        ----------
+        iterable: Collection
+        batched: Union[int, bool]
+        workers: int
+
+        Returns
+        -------
+        Tuple[Collection, bool]
+            (&#39;terable, False) unchanged if the number of batches ends up being 1, or if &#39;batched&#39; is False, else
+            returns (np.array_split(collection, nbatches), True)
+        &#34;&#34;&#34;
+        if workers is None:
+            return iterable, False
+        use_batch_multiplier = True
+        printed = False
+        if isinstance(batched, int) and not isinstance(batched, bool):
+            chunksize = min(iterable.length, abs(batched))
+            if chunksize &lt;= 0:
+                chunksize = 1
+            if chunksize == 1:
+                batched = False
+            else:
+                batched = True
+            nbatches = math.ceil(iterable.length / chunksize)
+            use_batch_multiplier = False
+            if self.verbose is True:
+                printed = True
+                logger.info(
+                    f&#34;Batching {iterable.length} objects into {nbatches}&#34;
+                    f&#34; batched of user-specified chunk size~{chunksize}&#34;
+                )
+        else:
+            nbatches = workers
+        if batched is True:
+            if iterable.length &lt;= nbatches or nbatches == 1:
+                return iterable, False
+            else:
+                if self._batch_multiplier is not None and use_batch_multiplier:
+                    nbatches = min(iterable.length, self._batch_multiplier * nbatches)
+                if self.verbose is True and printed is False:
+                    logger.info(f&#34;Batching {iterable.length} objects into {nbatches} batches&#34;)
+                with warnings.catch_warnings():
+                    warnings.simplefilter(&#34;ignore&#34;, category=np.VisibleDeprecationWarning)
+                    iterable = iterable.split(nbatches)
+                return iterable, True
+        return iterable, False
+
+    def _pre_launch(self, elements, method, batched, kwargs):
+        &#34;&#34;&#34;Method passed to the underlying engine (multiproc, dask, mpi...)
+
+        Parameters
+        ----------
+        elements: Collection
+            The collection of batches if dong batch run, or the original collection of elements
+        method: Callable
+        batched: bool
+        kwargs: dict
+            If &#39;share&#39; is present, will replace each kwargs[&#39;shared&#39;][item] by the read data.
+            If &#39;init_method&#39; in present, will call it and remove it from kwargs. Then **kwargs is passed to &#39;method&#39;.
+        &#34;&#34;&#34;
+        try:
+            if &#34;share&#34; in kwargs:
+                for item in kwargs[&#34;share&#34;]:
+
+                    in_method = False
+                    in_init_method = False
+                    if item in dict(inspect.signature(method).parameters):
+                        in_method = True
+                    if &#34;init_method&#34; in kwargs:
+                        if &#34;method&#34; not in kwargs[&#34;init_method&#34;]:
+                            raise ValueError(&#34;If using kwarg &#39;init_method&#39; in Engine, must specify the &#39;method&#39; key&#34;)
+                        if item in dict(inspect.signature(kwargs[&#34;init_method&#34;][&#34;method&#34;]).parameters):
+                            in_init_method = True
+                    if not in_init_method and not in_method:
+                        raise ValueError(
+                            f&#34;Shared keyword argument {item} is not valid for the given method and init_method&#34;
+                        )
+
+                    item_loaded = kwargs[&#34;share&#34;][item][0].read()
+                    if kwargs[&#34;share&#34;][item][1] == self.__class__.PANDAS.Series:
+                        item_loaded = item_loaded.iloc[:, 0]
+                    elif kwargs[&#34;share&#34;][item][1] == np.ndarray:
+                        item_loaded = item_loaded.values
+                    if in_method:
+                        kwargs[item] = item_loaded
+                    if in_init_method:
+                        if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                            kwargs[&#34;init_method&#34;][&#34;kwargs&#34;][item] = item_loaded
+                        else:
+                            kwargs[&#34;init_method&#34;][&#34;kwargs&#34;] = {item: item_loaded}
+                del kwargs[&#34;share&#34;]
+
+            for item in kwargs:
+                if item == &#34;init_method&#34;:
+                    continue
+                in_method = False
+                in_init_method = False
+                if item in dict(inspect.signature(method).parameters):
+                    in_method = True
+                if &#34;init_method&#34; in kwargs:
+                    if &#34;method&#34; not in kwargs[&#34;init_method&#34;]:
+                        raise ValueError(&#34;If using kwarg &#39;init_method&#39; in Engine, must specify the &#39;method&#39; key&#34;)
+                    if item in dict(inspect.signature(kwargs[&#34;init_method&#34;][&#34;method&#34;]).parameters):
+                        in_init_method = True
+                if not in_init_method and not in_method:
+                    raise ValueError(f&#34;Keyword argument {item} is not valid for the given method and init_method&#34;)
+                if in_init_method:
+                    if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                        kwargs[&#34;init_method&#34;][&#34;kwargs&#34;][item] = kwargs[item]
+                    else:
+                        kwargs[&#34;init_method&#34;][&#34;kwargs&#34;] = {item: kwargs[item]}
+
+            if &#34;init_method&#34; in kwargs:
+                if &#34;kwargs&#34; in kwargs[&#34;init_method&#34;]:
+                    kwargs[&#34;init_method&#34;][&#34;method&#34;](**kwargs[&#34;init_method&#34;][&#34;kwargs&#34;])
+                else:
+                    kwargs[&#34;init_method&#34;][&#34;method&#34;]()
+                del kwargs[&#34;init_method&#34;]
+
+            if not batched:
+                return _launch(method, elements, kwargs)
+
+            to_ret, times, mems = np.array([_launch(method, element, kwargs) for element in elements], dtype=&#34;object&#34;).T
+
+            return to_ret, times, mems
+        except Exception as e:
+            logger.critical(
+                f&#34;Process caught an error on element(s) {elements}&#34;
+                f&#34; : {&#39;&#39;.join(tb.format_exception(None, e, e.__traceback__))}&#34;
+            )
+            raise e</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="adparallelengine.adparallelengine.Engine.DASK_CLIENT"><code class="name">var <span class="ident">DASK_CLIENT</span></code></dt>
+<dd>
+<div class="desc"><p>Connect to and submit computation to a Dask cluster</p>
+<p>The Client connects users to a Dask cluster.
+It provides an asynchronous
+user interface around functions and futures.
+This class resembles
+executors in <code>concurrent.futures</code> but also allows <code>Future</code> objects
+within <code>submit/map</code> calls.
+When a Client is instantiated it takes over
+all <code>dask.compute</code> and <code>dask.persist</code> calls by default.</p>
+<p>It is also common to create a Client without specifying the scheduler
+address , like <code>Client()</code>.
+In this case the Client creates a
+:class:<code>LocalCluster</code> in the background and connects to that.
+Any extra
+keywords are passed from Client to LocalCluster in this case.
+See the
+LocalCluster documentation for more information.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>address</code></strong> :&ensp;<code>string,</code> or <code>Cluster</code></dt>
+<dd>This can be the address of a <code>Scheduler</code> server like a string
+<code>'127.0.0.1:8786'</code> or a cluster object like <code>LocalCluster()</code></dd>
+<dt><strong><code>loop</code></strong></dt>
+<dd>The event loop</dd>
+<dt><strong><code>timeout</code></strong> :&ensp;<code>int (defaults to configuration <code>distributed.comm.timeouts.connect</code>)</code></dt>
+<dd>Timeout duration for initial connection to the scheduler</dd>
+<dt><strong><code>set_as_default</code></strong> :&ensp;<code>bool (True)</code></dt>
+<dd>Use this Client as the global dask scheduler</dd>
+<dt><strong><code>scheduler_file</code></strong> :&ensp;<code>string (optional)</code></dt>
+<dd>Path to a file with scheduler information if available</dd>
+<dt><strong><code>security</code></strong> :&ensp;<code>Security</code> or <code>bool</code>, optional</dt>
+<dd>Optional security information. If creating a local cluster can also
+pass in <code>True</code>, in which case temporary self-signed credentials will
+be created automatically.</dd>
+<dt><strong><code>asynchronous</code></strong> :&ensp;<code>bool (False by default)</code></dt>
+<dd>Set to True if using this client within async/await functions or within
+Tornado gen.coroutines.
+Otherwise this should remain False for normal
+use.</dd>
+<dt><strong><code>name</code></strong> :&ensp;<code>string (optional)</code></dt>
+<dd>Gives the client a name that will be included in logs generated on
+the scheduler for matters relating to this client</dd>
+<dt><strong><code>heartbeat_interval</code></strong> :&ensp;<code>int (optional)</code></dt>
+<dd>Time in milliseconds between heartbeats to scheduler</dd>
+<dt><strong><code>serializers</code></strong></dt>
+<dd>Iterable of approaches to use when serializing the object.
+See :ref:<code>serialization</code> for more.</dd>
+<dt><strong><code>deserializers</code></strong></dt>
+<dd>Iterable of approaches to use when deserializing the object.
+See :ref:<code>serialization</code> for more.</dd>
+<dt><strong><code>extensions</code></strong> :&ensp;<code>list</code></dt>
+<dd>The extensions</dd>
+<dt><strong><code>direct_to_workers</code></strong> :&ensp;<code>bool (optional)</code></dt>
+<dd>Whether or not to connect directly to the workers, or to ask
+the scheduler to serve as intermediary.</dd>
+<dt><strong><code>connection_limit</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of open comms to maintain at once in the connection pool</dd>
+</dl>
+<p>**kwargs:
+If you do not pass a scheduler address, Client will create a
+<code>LocalCluster</code> object, passing any extra keyword arguments.</p>
+<h2 id="examples">Examples</h2>
+<p>Provide cluster's scheduler node address on initialization:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; client = Client('127.0.0.1:8786')  # doctest: +SKIP
+</code></pre>
+<p>Use <code>submit</code> method to send individual computations to the cluster</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; a = client.submit(add, 1, 2)  # doctest: +SKIP
+&gt;&gt;&gt; b = client.submit(add, 10, 20)  # doctest: +SKIP
+</code></pre>
+<p>Continue using submit or map on results to build up larger computations</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; c = client.submit(add, a, b)  # doctest: +SKIP
+</code></pre>
+<p>Gather results with the <code>gather</code> method.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; client.gather(c)  # doctest: +SKIP
+33
+</code></pre>
+<p>You can also call Client with no arguments in order to create your own
+local cluster.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; client = Client()  # makes your own local &quot;cluster&quot; # doctest: +SKIP
+</code></pre>
+<p>Extra keywords will be passed directly to LocalCluster</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; client = Client(n_workers=2, threads_per_worker=4)  # doctest: +SKIP
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<dl>
+<dt><code>distributed.scheduler.Scheduler</code></dt>
+<dd>Internal scheduler
+<code>distributed.LocalCluster:</code></dd>
+</dl></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.K8S_CLUSTER"><code class="name">var <span class="ident">K8S_CLUSTER</span></code></dt>
+<dd>
+<div class="desc"><p>Launch a Dask cluster on Kubernetes</p>
+<p>This starts a local Dask scheduler and then dynamically launches
+Dask workers on a Kubernetes cluster. The Kubernetes cluster is taken
+to be either the current one on which this code is running, or as a
+fallback, the default one configured in a kubeconfig file.</p>
+<p><strong>Environments</strong></p>
+<p>Your worker pod image should have a similar environment to your local
+environment, including versions of Python, dask, cloudpickle, and any
+libraries that you may wish to use (like NumPy, Pandas, or Scikit-Learn).
+See examples below for suggestions on how to manage and check for this.</p>
+<p><strong>Network</strong></p>
+<p>Since the Dask scheduler is launched locally, for it to work, we need to
+be able to open network connections between this local node and all the
+workers nodes on the Kubernetes cluster. If the current process is not
+already on a Kubernetes node, some network configuration will likely be
+required to make this work.</p>
+<p><strong>Resources</strong></p>
+<p>Your Kubernetes resource limits and requests should match the
+<code>--memory-limit</code> and <code>--nthreads</code> parameters given to the
+<code>dask-worker</code> command.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>pod_template</code></strong> :&ensp;<code>(kubernetes.client.V1Pod, dict, str)</code></dt>
+<dd>A Kubernetes specification for a Pod for a dask worker. Can be either a
+<code>V1Pod</code>, a dict representation of a pod, or a path to a yaml file
+containing a pod specification.</dd>
+<dt><strong><code>scheduler_pod_template</code></strong> :&ensp;<code>kubernetes.client.V1Pod (optional)</code></dt>
+<dd>A Kubernetes specification for a Pod for a dask scheduler.
+Defaults to the pod_template.</dd>
+<dt><strong><code>name</code></strong> :&ensp;<code>str (optional)</code></dt>
+<dd>Name given to the pods.
+Defaults to <code>dask-$USER-random</code></dd>
+<dt><strong><code>namespace</code></strong> :&ensp;<code>str (optional)</code></dt>
+<dd>Namespace in which to launch the workers.
+Defaults to current namespace if available or "default"</dd>
+<dt><strong><code>n_workers</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of workers on initial launch.
+Use <code>scale</code> to change this number in the future</dd>
+<dt><strong><code>env</code></strong> :&ensp;<code>Dict[str, str]</code></dt>
+<dd>Dictionary of environment variables to pass to worker pod</dd>
+<dt><strong><code>host</code></strong> :&ensp;<code>str</code></dt>
+<dd>Listen address for local scheduler.
+Defaults to 0.0.0.0</dd>
+<dt><strong><code>port</code></strong> :&ensp;<code>int</code></dt>
+<dd>Port of local scheduler</dd>
+<dt><strong><code>auth</code></strong> :&ensp;<code>List[ClusterAuth] (optional)</code></dt>
+<dd>Configuration methods to attempt in order.
+Defaults to
+<code>[InCluster(), KubeConfig()]</code>.</dd>
+<dt><strong><code>idle_timeout</code></strong> :&ensp;<code>str (optional)</code></dt>
+<dd>The scheduler task will exit after this amount of time
+if there are no requests from the client. Default is to
+never timeout.</dd>
+<dt><strong><code>scheduler_service_wait_timeout</code></strong> :&ensp;<code>int (optional)</code></dt>
+<dd>Timeout, in seconds, to wait for the remote scheduler service to be ready.
+Defaults to 30 seconds.
+Set to 0 to disable the timeout (not recommended).</dd>
+<dt><strong><code>scheduler_service_name_resolution_retries</code></strong> :&ensp;<code>int (optional)</code></dt>
+<dd>Number of retries to resolve scheduler service name when running
+from within the Kubernetes cluster.
+Defaults to 20.
+Must be set to 1 or greater.</dd>
+<dt><strong><code>deploy_mode</code></strong> :&ensp;<code>str (optional)</code></dt>
+<dd>Run the scheduler as "local" or "remote".
+Defaults to <code>"remote"</code>.</dd>
+<dt><strong><code>apply_default_affinity</code></strong> :&ensp;<code>str (optional)</code></dt>
+<dd>Apply a default affinity to pods: "required", "preferred" or "none"
+Defaults to <code>"preferred"</code>.</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Additional keyword arguments to pass to SpecCluster</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from dask_kubernetes import KubeCluster, make_pod_spec
+&gt;&gt;&gt; pod_spec = make_pod_spec(image='ghcr.io/dask/dask:latest',
+...                          memory_limit='4G', memory_request='4G',
+...                          cpu_limit=1, cpu_request=1,
+...                          env={'EXTRA_PIP_PACKAGES': 'fastparquet git+&lt;https://github.com/dask/distributed'}&gt;)
+&gt;&gt;&gt; cluster = KubeCluster(pod_spec)
+&gt;&gt;&gt; cluster.scale(10)
+</code></pre>
+<p>You can also create clusters with worker pod specifications as dictionaries
+or stored in YAML files</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; cluster = KubeCluster('worker-template.yml')
+&gt;&gt;&gt; cluster = KubeCluster({...})
+</code></pre>
+<p>Rather than explicitly setting a number of workers you can also ask the
+cluster to allocate workers dynamically based on current workload</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; cluster.adapt()
+</code></pre>
+<p>You can pass this cluster directly to a Dask client</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from dask.distributed import Client
+&gt;&gt;&gt; client = Client(cluster)
+</code></pre>
+<p>You can verify that your local environment matches your worker environments
+by calling <code>client.get_versions(check=True)</code>.
+This will raise an
+informative error if versions do not match.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; client.get_versions(check=True)
+</code></pre>
+<p>The <code>ghcr.io/dask/dask</code> docker images support <code>EXTRA_PIP_PACKAGES</code>,
+<code>EXTRA_APT_PACKAGES</code> and <code>EXTRA_CONDA_PACKAGES</code> environment variables
+to help with small adjustments to the worker environments.
+We recommend
+the use of pip over conda in this case due to a much shorter startup time.
+These environment variables can be modified directly from the KubeCluster
+constructor methods using the <code>env=</code> keyword.
+You may list as many
+packages as you like in a single string like the following:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; pip = 'pyarrow gcsfs git+&lt;https://github.com/dask/distributed'&gt;
+&gt;&gt;&gt; conda = '-c conda-forge scikit-learn'
+&gt;&gt;&gt; KubeCluster(..., env={'EXTRA_PIP_PACKAGES': pip,
+...                                 'EXTRA_CONDA_PACKAGES': conda})
+</code></pre>
+<p>You can also start a KubeCluster with no arguments <em>if</em> the worker template
+is specified in the Dask config files, either as a full template in
+<code>kubernetes.worker-template</code> or a path to a YAML file in
+<code>kubernetes.worker-template-path</code>.</p>
+<p>See <a href="https://docs.dask.org/en/latest/configuration.html">https://docs.dask.org/en/latest/configuration.html</a> for more
+information about setting configuration values.::</p>
+<pre><code>$ export DASK_KUBERNETES__WORKER_TEMPLATE_PATH=worker_template.yaml
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; cluster = KubeCluster()  # automatically finds 'worker_template.yaml'
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<p><code>KubeCluster.adapt</code></p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.MPI"><code class="name">var <span class="ident">MPI</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.MPIPOOLEXECUTOR"><code class="name">var <span class="ident">MPIPOOLEXECUTOR</span></code></dt>
+<dd>
+<div class="desc"><p>MPI-based asynchronous executor.</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.PANDAS"><code class="name">var <span class="ident">PANDAS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.PATH"><code class="name">var <span class="ident">PATH</span></code></dt>
+<dd>
+<div class="desc"><p>A class that allows one to use a path in a local file system or a Google Cloud Storage (GCS) file system in the
+same way one would use a <code>pathlib.Path</code> object. One can use many different GCP projects at once.</p>
+<p>Create a path that points to GCS, and one that does not:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; # Or : from transparentpath import TransparentPath
+&gt;&gt;&gt; p = Path(&quot;gs://mybucket/some_path&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; p2 = p / &quot;foo&quot;  # Will point to gs://mybucket/some_path/foo
+&gt;&gt;&gt; p3 = Path(&quot;bar&quot;)  # Will point to local path &quot;bar&quot;
+</code></pre>
+<p>Set all paths to point to GCS by default:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; Path.set_global_fs(&quot;gcs&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; p = Path(&quot;mybucket&quot;) / &quot;some_path&quot; # Will point to gs://mybucket/some_path
+&gt;&gt;&gt; p2 = p / &quot;foo&quot;  # Will point to gs://mybucket/some_path/foo
+&gt;&gt;&gt; p3 = Path(&quot;bar&quot;, fs=&quot;local&quot;)  # Will point to local path &quot;bar&quot;
+&gt;&gt;&gt; p4 = Path(&quot;other_bucket&quot;)  # Will point to gs://other_bucket (assuming other_bucket is a bucket)
+&gt;&gt;&gt; p5 = Path(&quot;not_a_bucket&quot;)  # Will point to local path &quot;not_a_bucket&quot; (assuming it is indeed, not a bucket)
+</code></pre>
+<p>Set all paths to point to severral GCS projects by default:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; Path.set_global_fs(&quot;gcs&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; Path.set_global_fs(&quot;gcs&quot;, token=&quot;some/other/cred/file.json&quot;)
+&gt;&gt;&gt; p = Path(&quot;mybucket&quot;) / &quot;some_path&quot; # Will point to gs://mybucket/some_path
+&gt;&gt;&gt; p2 = p / &quot;foo&quot;  # Will point to gs://mybucket/some_path/foo
+&gt;&gt;&gt; p3 = Path(&quot;bar&quot;, fs=&quot;local&quot;)  # Will point to local path &quot;bar&quot;
+&gt;&gt;&gt; p4 = Path(&quot;other_bucket&quot;)  # Will point to gs://other_bucket (assuming other_bucket is a bucket)
+&gt;&gt;&gt; p5 = Path(&quot;not_a_bucket&quot;)  # Will point to local path &quot;not_a_bucket&quot; (assuming it is indeed, not a bucket)
+</code></pre>
+<p>Here, <em>mybucket</em> and <em>other_bucket</em> can be on two different projects, as long as at least one of the
+credential files can access them.</p>
+<p>Set all paths to point to GCS by default, and specify a default bucket:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; Path.set_global_fs(&quot;gcs&quot;, bucket=&quot;mybucket&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; p = Path(&quot;some_path&quot;)  # Will point to gs://mybucket/some_path/
+&gt;&gt;&gt; p2 = p / &quot;foo&quot;  # Will point to gs://mybucket/some_path/foo
+&gt;&gt;&gt; p3 = Path(&quot;bar&quot;, fs=&quot;local&quot;)  # Will point to local path &quot;bar&quot;
+&gt;&gt;&gt; p4 = Path(&quot;other_bucket&quot;)  # Will point to gs://mybucket/other_bucket
+&gt;&gt;&gt; p5 = Path(&quot;not_a_bucket&quot;)  # Will point to gs://mybucket/not_a_bucket
+</code></pre>
+<p>The latest option is interesting if you have a code that should be able to run with paths being sometimes remote,
+sometimes local. To do that, you can use the class attribute <code>nas_dir</code>. Then when a path is created, if it starts by
+<em>nas_dir</em>'s path, <em>nas_dir</em>'s path is replaced by the bucket name. This is useful if, for instance, you have a
+backup of a bucket locally at let's say <em>/my/local/backup</em>. Then you can do:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; Path.nas_dir = &quot;/my/local/backup&quot;
+&gt;&gt;&gt; Path.set_global_fs(&quot;gcs&quot;, bucket=&quot;mybucket&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; p = Path(&quot;some_path&quot;)  # Will point to gs://mybucket/some_path/
+&gt;&gt;&gt; p3 = Path(&quot;/my/local/backup&quot;) / &quot;some_path&quot;  # Will ALSO point to gs://mybucket/some_path/
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; Path.nas_dir = &quot;/my/local/backup&quot;
+&gt;&gt;&gt; # Path.set_global_fs(&quot;gcs&quot;, bucket=&quot;mybucket&quot;, token=&quot;some/cred/file.json&quot;)
+&gt;&gt;&gt; p = Path(&quot;some_path&quot;)  # Will point to /my/local/backup/some_path/
+&gt;&gt;&gt; p3 = Path(&quot;/my/local/backup&quot;) / &quot;some_path&quot;  # Will ALSO point to /my/local/backup/some_path/
+</code></pre>
+<p>In all the previous examples, the <em>token</em> argument can be ommited if the environment variable
+<strong>GOOGLE_APPLICATION_CREDENTIALS</strong> is set and point to a <em>.json</em> credential file, or if your code runs on a GCP
+machine (VM, cluster&hellip;) with access to GCS.</p>
+<p>No matter whether you are using GCS or your local file system, here is a sample of what TransparentPath can do:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; # Path.set_global_fs(&quot;gcs&quot;, bucket=&quot;bucket_name&quot;, project=&quot;project_name&quot;)
+&gt;&gt;&gt; # The following lines will also work with the previous line uncommented
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Reading a csv into a pandas' DataFrame and saving it as a parquet file
+&gt;&gt;&gt; mypath = Path(&quot;foo&quot;) / &quot;bar.csv&quot;
+&gt;&gt;&gt; df = mypath.read(index_col=0, parse_dates=True)
+&gt;&gt;&gt; otherpath = mypath.with_suffix(&quot;.parquet&quot;)
+&gt;&gt;&gt; otherpath.write(df)
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Reading and writing a HDF5 file works on GCS and on local:
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; mypath = Path(&quot;foo&quot;) / &quot;bar.hdf5&quot;  # can be .h5 too
+&gt;&gt;&gt; with mypath.read() as ifile:
+&gt;&gt;&gt;     arr = np.array(ifile[&quot;store1&quot;])
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Doing '..' from 'foo/bar.hdf5' will return 'foo'
+&gt;&gt;&gt; # Then doing 'foo' + 'babar.hdf5' will return 'foo/babar.hdf5' ('+' and '/' are synonymes)
+&gt;&gt;&gt; mypath.cd(&quot;..&quot;)  # Does not return a path but modifies inplace
+&gt;&gt;&gt; with (mypath  + &quot;babar.hdf5&quot;).write(None) as ofile:
+&gt;&gt;&gt;     # Note here that we must explicitely give 'None' to the 'write' method in order for it
+&gt;&gt;&gt;     # to return the open HDF5 file. We could also give a dict of {arr: &quot;store1&quot;} to directly
+&gt;&gt;&gt;     # write the file.
+&gt;&gt;&gt;     ofile[&quot;store1&quot;] = arr
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Reading a text file. Can also use 'w', 'a', etc... also works with binaries.
+&gt;&gt;&gt; mypath = Path(&quot;foo&quot;) / &quot;bar.txt&quot;
+&gt;&gt;&gt; with open(mypath, &quot;r&quot;) as ifile:
+&gt;&gt;&gt;     lines = ifile.readlines()
+&gt;&gt;&gt;
+&gt;&gt;&gt; # open is overriden to understand gs://
+&gt;&gt;&gt; with open(&quot;gs://bucket/file.txt&quot;, &quot;r&quot;) as ifile:
+&gt;&gt;&gt;     _ = ifile.readlines()
+&gt;&gt;&gt;
+&gt;&gt;&gt; mypath.is_file()
+&gt;&gt;&gt; mypath.is_dir()
+&gt;&gt;&gt; mypath.is_file()
+&gt;&gt;&gt; files = mypath.parent.glob(&quot;*.csv&quot;)  # Returns a Iterator[TransparentPath], can be casted to list
+</code></pre>
+<p>As you can see from the previous example, all methods returning a path from a TransparentPath return a
+TransparentPath.</p>
+<p>TransparentPath supports writing and reading Dask dataframes from and to csv, excel, parquet and HDF5, both locally
+and remotely. You need to have dask-dataframe and dask-distributed installed, which will be the case if you ran <code>pip
+install transparentpath[dask]</code>. Writing Dask dataframes does not require any additionnal arguments to be
+passed for the type will be checked before calling the appropriate writting method. Reading however requires you to
+pass the <em>use_dask</em> argument to the <code>transparentpath.gcsutils.transparentpath.TransparentPath.read()</code> method.
+If the file to read is HDF5, you will also need to specify <em>set_names</em>, matching the argument <em>key</em> of Dask's
+<code>read_hdf()</code> method.</p>
+<p>Note that if reading a remote HDF5, the file will be downloaded in your local tmp, then read. If not using Dask, the
+file is deleted after being read. But since Dask uses delayed processes, deleting the file might occure before the
+file is actually read, so the file is kept. Up to you to empty your <em>/tmp</em> directory if it is not done automatically
+by your system.</p>
+<p>All instances of TransparentPath are absolute, even if created with relative paths.</p>
+<p>TransparentPaths are seen as instances of str:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; path = Path()
+&gt;&gt;&gt; isinstance(path, str)  # returns True
+</code></pre>
+<p>This is required to allow</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; path = Path()
+&gt;&gt;&gt; # noinspection PyTypeChecker
+&gt;&gt;&gt; with open(path, &quot;w/r/a/b...&quot;) as ifile:
+&gt;&gt;&gt; ...
+to work. If you want to check whether path is actually a TransparentPath and nothing else, use
+&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt; path = Path()
+&gt;&gt;&gt; assert type(path) == Path
+&gt;&gt;&gt; assert issubclass(path.__class__, Path)
+instead.
+</code></pre>
+<p>Any method or attribute valid in <code>fsspec.implementations.local.LocalFileSystem</code>, <code>gcs.GCSFileSystem</code>, <code>pathlib.Path</code>
+or <code>str</code> can be used on a TransparentPath object.</p>
+<p><strong>Warnings about GCS behaviour</strong>
+if you use GCS:</p>
+<ol>
+<li>
+<p>Remember that directories are not a thing on GCS.</p>
+</li>
+<li>
+<p>You do not need the parent directories of a file on GCS to create the file : they will be created if they do
+not exist (that is not true localy however).</p>
+</li>
+<li>
+<p>If you delete a file that was alone in its parent directories, those directories disapear.</p>
+</li>
+<li>
+<p>If a file exists at the same path than a directory, then TransparentPath is not able to know which one is the
+file and which one is the directory, and will raise a
+<code>transparentpath.gcsutils.transparentpath.TPMultipleExistenceError</code> upon object creation. This
+check for multiplicity is done at almost every method in case an exterior source created a duplicate of the
+file/directory. This case can't happen locally. However, it can happen on remote if the cache is not updated
+frequently. Doing this check can significantly increase computation time (if using glob on a directory
+containing a lot of files for example). You can deactivate it either globally (TransparentPath._do_check =
+False and TransparentPath._do_update_cache = False), for a specific path (pass nockeck=True at path
+creation), or for glob and ls by passing fast=True as additional argument.</p>
+</li>
+</ol>
+<p>TransparentPath on GCS is slow because of the verification for multiple existance and the cache updating.
+However one can tweak those a bit. As mentionned earlier, cache updating and multiple existence check can be
+deactivated for all paths by doing</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from transparentpath import TransparentPath
+&gt;&gt;&gt; TransparentPath._do_update_cache = False
+&gt;&gt;&gt; TransparentPath._do_check = False
+</code></pre>
+<p>They can also be deactivated for one path only by doing</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; p = TransparentPath(&quot;somepath&quot;, nocheck=True, notupdatecache=True)
+</code></pre>
+<p>It is also possible to specify when to do those check : at path creation, path usage (read, write, exists&hellip;) or
+both. Here to it can be set on all paths or only some :</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; TransparentPath._when_checked = {&quot;created&quot;: True, &quot;used&quot;: False}  # Default value
+&gt;&gt;&gt; TransparentPath._when_updated = {&quot;created&quot;: True, &quot;used&quot;: False}  # Default value
+&gt;&gt;&gt; p = TransparentPath(
+&gt;&gt;&gt;   &quot;somepath&quot;, when_checked={&quot;created&quot;: False, &quot;used&quot;: False}, notupdatecache={&quot;created&quot;: False, &quot;used&quot;: False}
+&gt;&gt;&gt; )
+</code></pre>
+<p>There is also an expiration time in seconds for check and update : the operation is not done if it was done not a
+long time ago. Those expiration times are of 1 second by default and can be changed through :</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; TransparentPath._check_expire = 10
+&gt;&gt;&gt; TransparentPath._update_expire = 10
+&gt;&gt;&gt; p = TransparentPath(&quot;somepath&quot;, check_expire=0, update_expire=0)
+</code></pre>
+<pre><code>
+
+&lt;code&gt;transparentpath.gcsutils.transparentpath.TransparentPath.glob()&lt;/code&gt; and
+&lt;code&gt;transparentpath.gcsutils.transparentpath.TransparentPath.ls()&lt;/code&gt; have their own way to be accelerated :
+```python-repl
+&gt;&gt;&gt; p.glob(&quot;/*&quot;, fast=True)
+&gt;&gt;&gt; p.ls(&quot;&quot;, fast=True)
+Basically, *fast=True* means &quot;do not check and do not update the cache&quot; for all the items found by the method.
+</code></pre>
+<p>Builtin <code>open</code> is overloaded by TransparentPath to support giving a TransparentPath to it. If a method in a package
+you did not create uses <code>open</code> in a <em>with</em> statement, everything should work out of the box with a TransparentPath.</p>
+<p>However, if it uses the <strong>output</strong> of <code>open</code>, you will have to create a class to
+override this method and anything using its ouput. Indeed, <code>open</code> returns a file descriptor, not an IO, and I did
+not find a way to access file descriptors on gcs. For example, in the FileLock package, the <code>acquire</code> method calls
+the <code>_acquire</code> method which calls <code>os.open</code>, so I had to do that:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from filelock import FileLock
+&gt;&gt;&gt; from transparentpath import Path
+&gt;&gt;&gt;
+&gt;&gt;&gt; class MyFileLock(FileLock):
+&gt;&gt;&gt;     def _acquire(self):
+&gt;&gt;&gt;         tmp_lock_file = self._lock_file
+&gt;&gt;&gt;         if not type(tmp_lock_file) == Path:
+&gt;&gt;&gt;             tmp_lock_file = Path(tmp_lock_file)
+&gt;&gt;&gt;         try:
+&gt;&gt;&gt;             fd = tmp_lock_file.open(&quot;x&quot;)
+&gt;&gt;&gt;         except (IOError, OSError, FileExistsError):
+&gt;&gt;&gt;             pass
+&gt;&gt;&gt;         else:
+&gt;&gt;&gt;             self._lock_file_fd = fd
+&gt;&gt;&gt;         return None
+</code></pre>
+<p>The original method was:</p>
+<blockquote>
+<blockquote>
+<blockquote></blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-python-repl">&gt;&gt;&gt; import os
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; def _acquire(self):
+&gt;&gt;&gt;     open_mode = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_TRUNC
+&gt;&gt;&gt;     try:
+&gt;&gt;&gt;         fd = os.open(self._lock_file, open_mode)
+&gt;&gt;&gt;     except (IOError, OSError):
+&gt;&gt;&gt;         pass
+&gt;&gt;&gt;     else:
+&gt;&gt;&gt;         self._lock_file_fd = fd
+&gt;&gt;&gt;     return None
+&gt;&gt;&gt; ...
+</code></pre>
+<p>I tried to implement a working version of any method valid in pathlib.Path or in file systems, but futur changes
+in any of those will not be taken into account quickly. You can report missing supports by opening an issue.</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.TRACEMALLOC"><code class="name">var <span class="ident">TRACEMALLOC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.kinds"><code class="name">var <span class="ident">kinds</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="adparallelengine.adparallelengine.Engine.import_dask"><code class="name flex">
+<span>def <span class="ident">import_dask</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def import_dask(cls):
+    try:
+        # noinspection PyUnresolvedReferences
+        from dask.distributed import Client
+
+        cls._DASK_CLIENT = Client
+    except ImportError as e:
+        raise ImportError(
+            &#34;AdparallelEngine can&#39;t import dask. You can do it by running `pip install adparallelengine[dask]`.&#34;
+            f&#34;\n\nOriginal error was {str(e)}&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.import_k8s"><code class="name flex">
+<span>def <span class="ident">import_k8s</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def import_k8s(cls):
+    try:
+        # noinspection PyUnresolvedReferences
+        from dask_kubernetes import KubeCluster
+
+        cls._K8S_CLUSTER = KubeCluster
+    except ImportError as e:
+        raise ImportError(
+            &#34;AdparallelEngine can not import dask_kubernetes. You can do it by running&#34;
+            f&#34; `pip install adparallelengine[k8s]`.\n\nOriginal error was {str(e)}&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.import_mpi"><code class="name flex">
+<span>def <span class="ident">import_mpi</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def import_mpi(cls):
+    try:
+        import mpi4py.rc
+
+        mpi4py.rc.threads = False
+        from mpi4py import MPI
+        from mpi4py.futures import MPIPoolExecutor
+
+        cls._MPI, cls._MPIPOOLEXECUTOR = MPI, MPIPoolExecutor
+    except ImportError as e:
+        raise ImportError(
+            &#34;AdparallelEngine can&#39;t import mpi4py. You can do it by running `pip install adparallelengine[mpi]`.&#34;
+            &#34; Make sure also that MPI is installed on your computer (OpenMPI should work)\n\n&#34;
+            f&#34;Original error was {str(e)}&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.import_pandas"><code class="name flex">
+<span>def <span class="ident">import_pandas</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def import_pandas(cls):
+    try:
+        import pandas as pd
+
+        cls._PANDAS = pd
+    except ImportError as e:
+        raise ImportError(
+            &#34;AdparallelEngine can&#39;t import pandas. You can do it by running&#34;
+            f&#34; `pip install adparallelengine[support_shared]`.\n\nOriginal error was {str(e)}&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.import_transparentpath"><code class="name flex">
+<span>def <span class="ident">import_transparentpath</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def import_transparentpath(cls):
+    try:
+        # noinspection PyUnresolvedReferences
+        from transparentpath import Path
+
+        cls._PATH = Path
+    except ImportError as e:
+        raise ImportError(
+            &#34;AdparallelEngine can&#39;t import transparentpath. You can do it by running&#34;
+            f&#34;`pip install adparallelengine[support_shared]` .\n\nOriginal error was {str(e)}&#34;
+        )</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="adparallelengine.adparallelengine.Engine.batch_multiplier"><code class="name">var <span class="ident">batch_multiplier</span></code></dt>
+<dd>
+<div class="desc"><p>Number of items to pass to each process if doing batched multiprocessing</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def batch_multiplier(self):
+    &#34;&#34;&#34;Number of items to pass to each process if doing batched multiprocessing&#34;&#34;&#34;
+    return self._kind</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.client"><code class="name">var <span class="ident">client</span> : Optional[None]</code></dt>
+<dd>
+<div class="desc"><p>Dask client, if using Dask or Dask-Kubernetes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def client(self) -&gt; Union[None, &#34;Client&#34;]:
+    &#34;&#34;&#34;Dask client, if using Dask or Dask-Kubernetes&#34;&#34;&#34;
+    return dask_client</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.context"><code class="name">var <span class="ident">context</span></code></dt>
+<dd>
+<div class="desc"><p>Can be "spawn" or "fork"</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def context(self):
+    &#34;&#34;&#34;Can be &#34;spawn&#34; or &#34;fork&#34; &#34;&#34;&#34;
+    return self._context</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.docker_image"><code class="name">var <span class="ident">docker_image</span></code></dt>
+<dd>
+<div class="desc"><p>If using Dask-Kubernetes, docker image of the main program</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.is_parallel"><code class="name">var <span class="ident">is_parallel</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>True if <code><a title="adparallelengine.adparallelengine.Engine.kind" href="#adparallelengine.adparallelengine.Engine.kind">Engine.kind</a></code> is anything but 'serial'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_parallel(self) -&gt; bool:
+    &#34;&#34;&#34;True if `adparallelengine.adparallelengine.Engine.kind` is anything but &#39;serial&#39;&#34;&#34;&#34;
+    return self._kind != &#34;serial&#34;</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.k8s_spec_dict"><code class="name">var <span class="ident">k8s_spec_dict</span></code></dt>
+<dd>
+<div class="desc"><p>If using Dask-Kubernetes, the dictionary of specs to give to KubeCluster.</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.kind"><code class="name">var <span class="ident">kind</span></code></dt>
+<dd>
+<div class="desc"><p>Can be "serial", "mpi", "dask", "multiproc", "concurrent", "kubernetes", "multithread"</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def kind(self):
+    &#34;&#34;&#34;Can be &#34;serial&#34;, &#34;mpi&#34;, &#34;dask&#34;, &#34;multiproc&#34;, &#34;concurrent&#34;, &#34;kubernetes&#34;, &#34;multithread&#34; &#34;&#34;&#34;
+    return self._kind</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.max_workers"><code class="name">var <span class="ident">max_workers</span></code></dt>
+<dd>
+<div class="desc"><p>Max number of parallel processes that can run at the same time</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def max_workers(self):
+    &#34;&#34;&#34;Max number of parallel processes that can run at the same time&#34;&#34;&#34;
+    return self._max_workers</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.path_shared"><code class="name">var <span class="ident">path_shared</span></code></dt>
+<dd>
+<div class="desc"><p>Where the shared objects should be written</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.peak_mem_allocations"><code class="name">var <span class="ident">peak_mem_allocations</span></code></dt>
+<dd>
+<div class="desc"><p>Dictionnary of maximum memory usage of the various methods that have been ran through this engine</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.print_percent"><code class="name">var <span class="ident">print_percent</span></code></dt>
+<dd>
+<div class="desc"><p>Which processes should print when they are done</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def print_percent(self):
+    &#34;&#34;&#34;Which processes should print when they are done&#34;&#34;&#34;
+    return self._print_percent</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.processes_or_workers"><code class="name">var <span class="ident">processes_or_workers</span></code></dt>
+<dd>
+<div class="desc"><p>If using Dask, whether processes or threds should be used</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def processes_or_workers(self):
+    &#34;&#34;&#34;If using Dask, whether processes or threds should be used&#34;&#34;&#34;
+    return self._processes_or_threads</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.times"><code class="name">var <span class="ident">times</span></code></dt>
+<dd>
+<div class="desc"><p>Dictionnary of run times of the various methods that have been ran through this engine</p></div>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.verbose"><code class="name">var <span class="ident">verbose</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def verbose(self):
+    return self._verbose</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="adparallelengine.adparallelengine.Engine.clean_shared"><code class="name flex">
+<span>def <span class="ident">clean_shared</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Removes 'path_shared' directory if exists</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clean_shared(self):
+    &#34;&#34;&#34;Removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+    if self.path_shared is not None:
+        self.path_shared.rm(absent=&#34;ignore&#34;, ignore_kind=True)</code></pre>
+</details>
+</dd>
+<dt id="adparallelengine.adparallelengine.Engine.close"><code class="name flex">
+<span>def <span class="ident">close</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>If using Dask or Dask-Kubernetes, closes the client. Also, removes 'path_shared' directory if exists</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close(self):
+    &#34;&#34;&#34;If using Dask or Dask-Kubernetes, closes the client. Also, removes &#39;path_shared&#39; directory if exists&#34;&#34;&#34;
+    if self.client is not None:
+        self.client.close()
+
+    self.clean_shared()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="adparallelengine" href="index.html">adparallelengine</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="adparallelengine.adparallelengine.dask_client" href="#adparallelengine.adparallelengine.dask_client">dask_client</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="adparallelengine.adparallelengine.to_bool" href="#adparallelengine.adparallelengine.to_bool">to_bool</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="adparallelengine.adparallelengine.CustomIterator" href="#adparallelengine.adparallelengine.CustomIterator">CustomIterator</a></code></h4>
+<ul class="">
+<li><code><a title="adparallelengine.adparallelengine.CustomIterator.split" href="#adparallelengine.adparallelengine.CustomIterator.split">split</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="adparallelengine.adparallelengine.Engine" href="#adparallelengine.adparallelengine.Engine">Engine</a></code></h4>
+<ul class="">
+<li><code><a title="adparallelengine.adparallelengine.Engine.DASK_CLIENT" href="#adparallelengine.adparallelengine.Engine.DASK_CLIENT">DASK_CLIENT</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.K8S_CLUSTER" href="#adparallelengine.adparallelengine.Engine.K8S_CLUSTER">K8S_CLUSTER</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.MPI" href="#adparallelengine.adparallelengine.Engine.MPI">MPI</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.MPIPOOLEXECUTOR" href="#adparallelengine.adparallelengine.Engine.MPIPOOLEXECUTOR">MPIPOOLEXECUTOR</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.PANDAS" href="#adparallelengine.adparallelengine.Engine.PANDAS">PANDAS</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.PATH" href="#adparallelengine.adparallelengine.Engine.PATH">PATH</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.TRACEMALLOC" href="#adparallelengine.adparallelengine.Engine.TRACEMALLOC">TRACEMALLOC</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.batch_multiplier" href="#adparallelengine.adparallelengine.Engine.batch_multiplier">batch_multiplier</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.clean_shared" href="#adparallelengine.adparallelengine.Engine.clean_shared">clean_shared</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.client" href="#adparallelengine.adparallelengine.Engine.client">client</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.close" href="#adparallelengine.adparallelengine.Engine.close">close</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.context" href="#adparallelengine.adparallelengine.Engine.context">context</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.docker_image" href="#adparallelengine.adparallelengine.Engine.docker_image">docker_image</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.import_dask" href="#adparallelengine.adparallelengine.Engine.import_dask">import_dask</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.import_k8s" href="#adparallelengine.adparallelengine.Engine.import_k8s">import_k8s</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.import_mpi" href="#adparallelengine.adparallelengine.Engine.import_mpi">import_mpi</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.import_pandas" href="#adparallelengine.adparallelengine.Engine.import_pandas">import_pandas</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.import_transparentpath" href="#adparallelengine.adparallelengine.Engine.import_transparentpath">import_transparentpath</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.is_parallel" href="#adparallelengine.adparallelengine.Engine.is_parallel">is_parallel</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.k8s_spec_dict" href="#adparallelengine.adparallelengine.Engine.k8s_spec_dict">k8s_spec_dict</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.kind" href="#adparallelengine.adparallelengine.Engine.kind">kind</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.kinds" href="#adparallelengine.adparallelengine.Engine.kinds">kinds</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.max_workers" href="#adparallelengine.adparallelengine.Engine.max_workers">max_workers</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.path_shared" href="#adparallelengine.adparallelengine.Engine.path_shared">path_shared</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.peak_mem_allocations" href="#adparallelengine.adparallelengine.Engine.peak_mem_allocations">peak_mem_allocations</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.print_percent" href="#adparallelengine.adparallelengine.Engine.print_percent">print_percent</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.processes_or_workers" href="#adparallelengine.adparallelengine.Engine.processes_or_workers">processes_or_workers</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.times" href="#adparallelengine.adparallelengine.Engine.times">times</a></code></li>
+<li><code><a title="adparallelengine.adparallelengine.Engine.verbose" href="#adparallelengine.adparallelengine.Engine.verbose">verbose</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
