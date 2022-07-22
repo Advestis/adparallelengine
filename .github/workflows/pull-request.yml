@@ -67,8 +67,10 @@ jobs:
           pip install --upgrade --upgrade-strategy eager pytest
           pip install --upgrade --upgrade-strategy eager pytest-gitignore
           pip install --upgrade --upgrade-strategy eager pytest-github-actions-annotate-failures
+          pip install --upgrade --upgrade-strategy eager pytest-parallel
           pip install --upgrade --upgrade-strategy eager .[all]
 
       - name: Test with pytest
         run: |
-          pytest -s -v
+          pytest --tests-per-worker auto -s -v -k test_serial
+          pytest -s -v -k "not test_serial"

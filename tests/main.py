@@ -87,15 +87,18 @@ if __name__ == "__main__":
             **share_kwargs
         )
 
-        if share is True and which != "serial":
-            assert len(list(engine.path_shared.ls())) == 1
+        if which != "serial":
+            if share is True:
+                assert len(list(engine.path_shared.ls())) == 1
+            else:
+                if engine.path_shared.isdir():
+                    assert len(list(engine.path_shared.ls())) == 0
         else:
-            if engine.path_shared.isdir():
-                assert len(list(engine.path_shared.ls())) == 0
-        engine.clean_shared()
-        assert len(list(engine.path_shared.ls())) == 0
+            assert engine.path_shared is None
 
-        # print("Results:", res)
+        engine.close()
+        if which != "serial":
+            assert not engine.path_shared.isdir()
 
         expected = [dfs[int(i / 2)] * s + f + Dummy.some_attr for i in range(0, len(dfs), 2)] + 3 * [
             dfs[int(i / 2)] * s + f + Dummy.some_attr for i in range(0, len(dfs), 2)
@@ -121,8 +124,10 @@ if __name__ == "__main__":
         x = fib(25)  # will have 5 elements: (0, 1), (1, 2), (3, 5), (8, 13), (21, 34)
         engine = Engine(kind=which, path_shared=Path("tests") / "data" / "shared", max_workers=max_cpu)
         results = engine(dummy_prod, x, length=5, batched=2 if batched is True else False, gather=gather)
-        if engine.path_shared.isdir():
+        if which != "serial":
             assert len(list(engine.path_shared.ls())) == 0
+        else:
+            assert engine.path_shared is None
 
         if gather:
             results.sort()

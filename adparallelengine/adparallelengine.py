@@ -325,14 +325,16 @@ class Engine:
         self._processes_or_threads = None
         self._print_percent = None
         self._max_workers = None
+        self._path_shared = None
 
         self.kind = kind
         self.batch_multiplier = batch_multiplier
         self.context = context
         self.processes_or_workers = processes_or_threads
         self.print_percent = print_percent if verbose is True else None
-        self._prev_print_percent = self.print_percent
         self.max_workers = max_workers
+        self.path_shared = path_shared
+        self._prev_print_percent = self.print_percent
         self._verbose = verbose
 
         self.__new = True
@@ -353,7 +355,6 @@ class Engine:
         """Removes 'path_shared' directory if exists"""
         if self.path_shared is not None:
             self.path_shared.rm(absent="ignore", ignore_kind=True)
-            self.path_shared.mkdir()
 
     def close(self):
         """If using Dask or Dask-Kubernetes, closes the client. Also, removes 'path_shared' directory if exists"""
@@ -361,6 +362,27 @@ class Engine:
             self.client.close()
 
         self.clean_shared()
+
+    @property
+    def path_shared(self):
+        return self._path_shared
+
+    @path_shared.setter
+    def path_shared(self, path_shared):
+        if self.kind == "serial":
+            self._path_shared = None
+            return
+        if path_shared is None:
+            path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparallelengine_temp"
+        if str(path_shared) == str(self.__class__.PATH(gettempdir(), fs="local")):
+            path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparallelengine_temp"
+            logger.warning(
+                "Can not use default tempdir as shared directory for adparellelengine, since it would be deleted after"
+                f" the run. Using {path_shared} instead."
+            )
+        if not path_shared.isdir():
+            path_shared.mkdir()
+        self._path_shared = path_shared
 
     @property
     def kind(self):
@@ -757,12 +779,6 @@ class Engine:
                     if isinstance(kwargs["share"][item], np.ndarray):
                         kwargs["share"][item] = self.__class__.PANDAS.DataFrame(kwargs["share"][item])
 
-                    if self.path_shared is None:
-                        self.path_shared = self.__class__.PATH(gettempdir(), fs="local") / "adparallelengine_temp"
-                        if self.path_shared.isdir():
-                            self.path_shared.rmdir()
-                    if not self.path_shared.isdir():
-                        self.path_shared.mkdir()
                     p = (self.path_shared / item).with_suffix(".parquet")
                     if not p.isfile():
                         p.write(kwargs["share"][item])
