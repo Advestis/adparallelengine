@@ -71,4 +71,5 @@ jobs:
       - name: Test with pytest
         run: |
           pytest --tests-per-worker auto -s -v -k test_serial
-          pytest -s -v -k "not test_serial"
+          pytest -s -v -k "test_multiproc"
+          pytest -s -v -k "test_dask"
