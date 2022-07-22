@@ -53,13 +53,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: mpi4py/setup-mpi@v1
-        with:
-          mpi: "openmpi"
-
-      - name: test mpi
-        run: mpirun python -m mpi4py.futures tests/main.py
-
       - uses: actions/cache@v2
         with:
           path: ${{ env.pythonLocation }}
@@ -77,6 +70,5 @@ jobs:
 
       - name: Test with pytest
         run: |
-          mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
           pytest --tests-per-worker auto -s -v -k test_serial
           pytest -s -v -k "not test_serial"
