@@ -55,7 +55,7 @@ jobs:
 
       - uses: mpi4py/setup-mpi@v1
         with:
-          mpi: "openmpi""
+          mpi: "openmpi"
 
       - name: test mpi
         run: mpirun $VIRTUAL_ENV/bin/python -m mpi4py.futures tests/main.py
